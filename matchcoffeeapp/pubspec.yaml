@@ -38,6 +38,9 @@ dependencies:
   firebase_core: ^2.11.0
   cloud_firestore: ^4.6.0
   firebase_auth: ^4.6.1
+  swipable_stack: ^2.0.0
+  swipe_deck: ^1.1.0
+  flutter_swipable: ^1.2.1
 
 dev_dependencies:
   flutter_mobx: ^2.0.1

@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-
+import 'package:swipe_deck/swipe_deck.dart';
 
 import 'agenda.dart';
 import 'citas.dart';
+import 'package:swipable_stack/swipable_stack.dart';
 
 class Perfil extends StatelessWidget {
   const Perfil({super.key});
@@ -16,16 +17,11 @@ class Perfil extends StatelessWidget {
         child: Center(
           child: Column(
             mainAxisSize: MainAxisSize.min,
-            children: const [
+            children: [
+              SizedBox(
+                height: MediaQuery.of(context).size.height * 0.10,
+              ),
               CustomCard(),
-              SizedBox(
-                height: 20,
-              ),
-              SizedBox(
-                width: 300,
-                child: Text(
-                    't is a long established fact that a reader will be distracted by the readable content of a page will be distracted by the readable content of a page'),
-              ),
             ],
           ),
         ),
@@ -42,13 +38,13 @@ class CustomCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return SizedBox(
-      height: 560,
-      width: 300,
+      height: MediaQuery.of(context).size.height * 0.85,
+      width: MediaQuery.of(context).size.width * 0.90,
       // color: Colors.amber,
       child: Stack(
         alignment: Alignment.center,
         children: [
-          const _Card(),
+          _Card(),
           Positioned(
             bottom: 0,
             child: Row(
@@ -70,42 +66,6 @@ class CustomCard extends StatelessWidget {
                     ),
                   ),
                 ),
-
-                SizedBox(width: 20),
-                Container(
-                  width: 60,
-                  height: 60,
-                  decoration: BoxDecoration(
-                    color: const Color(0xffffffff),
-                    shape: BoxShape.circle,
-                    boxShadow: [
-                      BoxShadow(
-                        color: Colors.grey.withOpacity(0.7),
-                        blurRadius: 7,
-                        spreadRadius: 3,
-                        offset: const Offset(1, 3),
-                      ),
-                    ],
-                  ),
-                  child: const Icon(
-                    Icons.favorite,
-                    color: Color(0xffe24e5a),
-                    size: 35,
-                  ),
-                ),
-                const SizedBox(width: 20),
-                Container(
-                  width: 50,
-                  height: 50,
-                  decoration: const BoxDecoration(
-                    color: Color(0xffe24e5a),
-                    shape: BoxShape.circle,
-                  ),
-                  child: const Icon(
-                    Icons.close,
-                    color: Colors.white,
-                  ),
-                ),
               ],
             ),
           )
@@ -115,63 +75,151 @@ class CustomCard extends StatelessWidget {
   }
 }
 
-class _Card extends StatelessWidget {
-  const _Card();
+List imagnes = [
+  'https://img.freepik.com/foto-gratis/retrato-hermoso-mujer-joven-posicion-pared-gris_231208-10760.jpg',
+  'https://www.shutterstock.com/image-photo/young-handsome-man-beard-wearing-260nw-1817367890.jpg',
+  'https://www.shutterstock.com/image-photo/happy-positive-handsome-old-man-260nw-2136574865.jpg'
+];
 
+class _Card extends StatefulWidget {
   @override
-  Widget build(BuildContext context) {
-    return Container(
-      alignment: Alignment.bottomLeft,
-      padding: EdgeInsets.all(10),
-      width: 300,
-      height: 500,
-      decoration: BoxDecoration(
-        color: Colors.amber,
-        image: const DecorationImage(
-          image: AssetImage('assets/images/fondo.jpg'),
-          fit: BoxFit.cover,
-        ),
-        borderRadius: BorderRadius.circular(15),
-        boxShadow: [
-          BoxShadow(
-            color: Colors.red.withOpacity(0.2),
-            spreadRadius: 6,
-            blurRadius: 8,
-          ),
-        ],
-      ),
-      child: Column(
-        mainAxisSize: MainAxisSize.min,
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          const Text(
-            'David Robledo',
-            style: TextStyle(
-                color: Colors.white, fontSize: 25, fontWeight: FontWeight.bold),
-          ),
-          Container(
-            padding: const EdgeInsets.symmetric(
-              vertical: 5,
-              horizontal: 14,
-            ),
-            margin: const EdgeInsets.only(top: 20),
-            decoration: BoxDecoration(
-              color: Colors.white,
-              borderRadius: BorderRadius.circular(20),
-            ),
-            child: const Text(
-              'Tauro',
-              style: TextStyle(
-                fontSize: 18,
-                fontWeight: FontWeight.bold,
+  State<_Card> createState() => _CardState();
+}
+
+class _CardState extends State<_Card> {
+  @override
+  Widget build(
+    BuildContext context,
+  ) {
+    return Scaffold(
+      body:
+          /*Container(
+          height: MediaQuery.of(context).size.height*0.90,
+          width:  MediaQuery.of(context).size.width*0.90,
+          child: SwipeDeck(
+            widgets: imagnes.map((e) => tarjeta(e, context)).toList())
+          ),*/
+
+          Stack(children: [
+        SwipableStack(
+          allowVerticalSwipe: false,
+          itemCount: imagnes.length,
+          builder: (BuildContext context, index) {
+            return Container(
+              alignment: Alignment.bottomLeft,
+              padding: EdgeInsets.all(10),
+              width: MediaQuery.of(context).size.width * 0.90,
+              height: MediaQuery.of(context).size.height * 0.80,
+              decoration: BoxDecoration(
+                color: Colors.amber,
+                image: DecorationImage(
+                  image: NetworkImage(
+                      imagnes[0]),
+                  fit: BoxFit.cover,
+                ),
+                borderRadius: BorderRadius.circular(15),
+                boxShadow: [
+                  BoxShadow(
+                    color: Colors.red.withOpacity(0.2),
+                    spreadRadius: 6,
+                    blurRadius: 8,
+                  ),
+                ],
               ),
-            ),
-          ),
-          const SizedBox(
-            height: 80,
-          )
-        ],
-      ),
+              child: Column(
+                mainAxisSize: MainAxisSize.min,
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  const Text(
+                    'Sofia Robledo',
+                    style: TextStyle(
+                        color: Colors.white,
+                        fontSize: 25,
+                        fontWeight: FontWeight.bold),
+                  ),
+                  Container(
+                    padding: const EdgeInsets.symmetric(
+                      vertical: 5,
+                      horizontal: 14,
+                    ),
+                    margin: const EdgeInsets.only(top: 20),
+                    decoration: BoxDecoration(
+                      color: Colors.white,
+                      borderRadius: BorderRadius.circular(20),
+                    ),
+                    child: const Text(
+                      'Tauro',
+                      style: TextStyle(
+                        fontSize: 18,
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
+                  ),
+                  const SizedBox(
+                    height: 80,
+                  )
+                ],
+              ),
+            );
+          },
+        ),
+      ]),
     );
   }
+}
+
+Widget tarjeta(String fotos, BuildContext context) {
+  return Container(
+    alignment: Alignment.bottomLeft,
+    padding: EdgeInsets.all(10),
+    width:  MediaQuery.of(context).size.width*0.80,
+    height:  MediaQuery.of(context).size.height*0.80,
+    decoration: BoxDecoration(
+      color: Colors.amber,
+      image: DecorationImage(
+        image: NetworkImage(fotos),
+        fit: BoxFit.cover,
+      ),
+      borderRadius: BorderRadius.circular(15),
+      boxShadow: [
+        BoxShadow(
+          color: Colors.red.withOpacity(0.2),
+          spreadRadius: 6,
+          blurRadius: 8,
+        ),
+      ],
+    ),
+    child: Column(
+      mainAxisSize: MainAxisSize.min,
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        const Text(
+          'Sofia Robledo',
+          style: TextStyle(
+              color: Colors.white, fontSize: 25, fontWeight: FontWeight.bold),
+        ),
+        Container(
+          padding: const EdgeInsets.symmetric(
+            vertical: 5,
+            horizontal: 14,
+          ),
+          margin: const EdgeInsets.only(top: 20),
+          decoration: BoxDecoration(
+            color: Colors.white,
+            borderRadius: BorderRadius.circular(20),
+          ),
+          child: const Text(
+            'Tauro',
+            style: TextStyle(
+              fontSize: 18,
+              fontWeight: FontWeight.bold,
+            ),
+          ),
+        ),
+        const SizedBox(
+          height: 80,
+        )
+      ],
+    ),
+  );
 }
