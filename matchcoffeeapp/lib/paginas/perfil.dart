@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:matchcoffeeapp/paginas/actualizardatos.dart';
 import 'package:swipe_deck/swipe_deck.dart';
 
 import 'agenda.dart';
@@ -25,6 +26,28 @@ class Perfil extends StatelessWidget {
             ],
           ),
         ),
+      ),
+      bottomNavigationBar: BottomNavigationBar(
+        type: BottomNavigationBarType.fixed,
+        selectedItemColor: Colors.red,
+        items: [
+          BottomNavigationBarItem(
+              icon: IconButton(
+                icon: Icon(
+                  Icons.home_outlined,
+                ),
+                onPressed: () {},
+              ),
+              label: ''),
+          BottomNavigationBarItem(
+              icon: IconButton(
+                icon: Icon(Icons.person_outline),
+                onPressed: () {
+                  Get.to(Actualizardatos());
+                },
+              ),
+              label: ''),
+        ],
       ),
     );
   }
@@ -81,9 +104,7 @@ class _CardState extends State<_Card> {
           itemCount: imagnes.length,
           controller: controller,
           builder: (BuildContext context, propierties) {
-            
-              //controller.rewind();
-            
+            ///*controller.rewind();
             return Container(
               alignment: Alignment.bottomLeft,
               padding: EdgeInsets.all(10),
@@ -144,8 +165,8 @@ class _CardState extends State<_Card> {
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
                           Container(
-                            width: 50,
-                            height: 50,
+                            width: 70,
+                            height: 70,
                             decoration: const BoxDecoration(
                               color: Color(0xff5588a2),
                               shape: BoxShape.circle,
