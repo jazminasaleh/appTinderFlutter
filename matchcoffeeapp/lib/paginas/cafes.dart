@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:matchcoffeeapp/paginas/actualizardatos.dart';
 //import 'package:flutter_datetime_picker/flutter_datetime_picker.dart';
 import 'package:matchcoffeeapp/paginas/citas.dart';
+import 'package:matchcoffeeapp/paginas/perfil.dart';
 import '../controladores/usuario.dart';
 
 class Cafes extends StatelessWidget {
@@ -11,7 +13,8 @@ class Cafes extends StatelessWidget {
       backgroundColor: Colors.white,
       body: Padding(
         padding: EdgeInsets.all(20),
-        child: SingleChildScrollView( // Envuelve la columna principal con un SingleChildScrollView
+        child: SingleChildScrollView(
+          // Envuelve la columna principal con un SingleChildScrollView
           child: Container(
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
@@ -109,6 +112,33 @@ class Cafes extends StatelessWidget {
             ),
           ),
         ),
+      ),
+      bottomNavigationBar: BottomNavigationBar(
+        type: BottomNavigationBarType.fixed,
+        selectedItemColor: Colors.red,
+        items: [
+          BottomNavigationBarItem(
+            icon: IconButton(
+              icon: Icon(
+                Icons.home_outlined,
+                color: Colors.grey,
+              ),
+              onPressed: () {
+                Get.to(Perfil());
+              },
+            ),
+            label: '',
+          ),
+          BottomNavigationBarItem(
+              icon: IconButton(
+                icon: Icon(Icons.person_outline),
+                color: Colors.grey,
+                onPressed: () {
+                  Get.to(Actualizardatos());
+                },
+              ),
+              label: ''),
+        ],
       ),
     );
   }

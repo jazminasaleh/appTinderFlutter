@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:matchcoffeeapp/paginas/perfil.dart';
 //import 'package:flutter_datetime_picker/flutter_datetime_picker.dart';
 import '../controladores/usuario.dart';
+import 'actualizardatos.dart';
 import 'cafes.dart';
 import 'calificacion.dart';
 
@@ -52,7 +54,6 @@ class Citas extends StatelessWidget {
                 ),
               ),
               SizedBox(height: 40),
-
               Row(
                 children: [
                   Expanded(
@@ -78,7 +79,8 @@ class Citas extends StatelessWidget {
                           border: Border.all(color: Color(0xFF5387A2)),
                           borderRadius: BorderRadius.circular(18),
                         ),
-                        padding: EdgeInsets.symmetric(vertical: 25, horizontal: 20),
+                        padding:
+                            EdgeInsets.symmetric(vertical: 25, horizontal: 20),
                         child: Row(
                           children: [
                             Icon(Icons.calendar_today),
@@ -121,27 +123,27 @@ class Citas extends StatelessWidget {
                           borderRadius: BorderRadius.circular(18),
                         ),
                         prefixIcon: Icon(Icons.access_time),
-                        contentPadding: EdgeInsets.symmetric(vertical: 30), // Aumenta el alto del campo
+                        contentPadding: EdgeInsets.symmetric(
+                            vertical: 30), // Aumenta el alto del campo
                       ),
                     ),
                   ),
-
-
                 ],
               ),
-
               SizedBox(height: 40),
-
               SizedBox(
                 width: double.infinity,
                 child: ElevatedButton(
                   style: ElevatedButton.styleFrom(
                     primary: Colors.white, // Cambiar el color de fondo a blanco
-                    onPrimary: Color(0xFF5387A2), // Cambiar el color del texto e icono a 0xFF5387A2
+                    onPrimary: Color(
+                        0xFF5387A2), // Cambiar el color del texto e icono a 0xFF5387A2
                     padding: EdgeInsets.symmetric(vertical: 26),
                     shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(16),
-                      side: BorderSide(color: Color(0xFF5387A2)), // Agregar un borde de color 0xFF5387A2
+                      side: BorderSide(
+                          color: Color(
+                              0xFF5387A2)), // Agregar un borde de color 0xFF5387A2
                     ),
                   ),
                   onPressed: () {
@@ -169,16 +171,13 @@ class Citas extends StatelessWidget {
                           ),
                         ),
                       )
-
                     ],
                   ),
                 ),
               ),
-
-
               SizedBox(height: 40),
 
-             /* TextFormField(
+              /* TextFormField(
                 controller: _textInputController,
                 decoration: InputDecoration(
                   labelText: 'Texto',
@@ -194,7 +193,6 @@ class Citas extends StatelessWidget {
                 ),
               ),*/
               SizedBox(height: 20),
-
               SizedBox(
                 height: 150,
                 child: Container(
@@ -207,8 +205,10 @@ class Citas extends StatelessWidget {
                     child: Padding(
                       padding: EdgeInsets.symmetric(horizontal: 16),
                       child: TextField(
-                        maxLines: null, // Permite que el campo de texto se expanda automáticamente
-                        textAlignVertical: TextAlignVertical.top, // Alinea el texto en la parte superior
+                        maxLines:
+                            null, // Permite que el campo de texto se expanda automáticamente
+                        textAlignVertical: TextAlignVertical
+                            .top, // Alinea el texto en la parte superior
                         style: TextStyle(
                           fontSize: 16,
                           color: Color(0xFF5387A2),
@@ -222,14 +222,7 @@ class Citas extends StatelessWidget {
                   ),
                 ),
               ),
-
-
-
-
-
               SizedBox(height: 40),
-
-
               SizedBox(
                 width: double.infinity,
                 child: ElevatedButton(
@@ -238,7 +231,7 @@ class Citas extends StatelessWidget {
                     padding: EdgeInsets.symmetric(vertical: 26),
                     shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(16),
-                    ),//aumento del padding
+                    ), //aumento del padding
                   ),
                   onPressed: () {
                     print('Botón Continuar presionado funca');
@@ -254,10 +247,37 @@ class Citas extends StatelessWidget {
                   ),
                 ),
               ),
-
             ],
           ),
         ),
+      ),
+      bottomNavigationBar: BottomNavigationBar(
+        type: BottomNavigationBarType.fixed,
+        selectedItemColor: Colors.red,
+        items: [
+          BottomNavigationBarItem(
+              icon: IconButton(
+                icon: Icon(
+                  Icons.home_outlined,
+                  color: Colors.grey,
+                ),
+                onPressed: () {
+                  Get.to(Perfil());
+                },
+              ),
+              label: ''),
+          BottomNavigationBarItem(
+              icon: IconButton(
+                icon: Icon(
+                  Icons.person_outline,
+                  color: Colors.grey,
+                ),
+                onPressed: () {
+                  Get.to(Actualizardatos());
+                },
+              ),
+              label: ''),
+        ],
       ),
     );
   }

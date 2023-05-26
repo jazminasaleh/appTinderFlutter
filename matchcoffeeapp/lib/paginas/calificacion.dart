@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:matchcoffeeapp/paginas/actualizardatos.dart';
+import 'package:matchcoffeeapp/paginas/perfil.dart';
 
 class RatingScreen extends StatefulWidget {
   const RatingScreen({super.key});
@@ -234,6 +236,15 @@ class _RatingScreenState extends State<RatingScreen> {
             ),
           ),
         ),
+      ),
+       bottomNavigationBar: BottomNavigationBar(
+        type:BottomNavigationBarType.fixed,
+        selectedItemColor: Colors.red,
+        items: [
+          BottomNavigationBarItem(icon: IconButton(icon: Icon(Icons.home_outlined, color: Colors.grey,), onPressed: () { Get.to(Perfil());},),label:'',),
+          BottomNavigationBarItem(icon: IconButton(icon: Icon(Icons.person_outline), color: Colors.green, onPressed: () { Get.to(Actualizardatos()); },),label:''),
+        ],
+
       ),
     );
   }

@@ -23,6 +23,7 @@ class Perfil extends StatelessWidget {
                 height: MediaQuery.of(context).size.height * 0.10,
               ),
               CustomCard(),
+              SizedBox(height: MediaQuery.of(context).size.height*0.20,)
             ],
           ),
         ),
@@ -111,7 +112,7 @@ class _CardState extends State<_Card> {
               alignment: Alignment.bottomLeft,
               padding: EdgeInsets.all(10),
               width: MediaQuery.of(context).size.width * 0.90,
-              height: MediaQuery.of(context).size.height * 0.80,
+              height: MediaQuery.of(context).size.height * 0.70,
               decoration: BoxDecoration(
                 color: Colors.amber,
                 image: DecorationImage(

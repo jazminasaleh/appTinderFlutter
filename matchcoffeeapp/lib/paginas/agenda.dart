@@ -11,14 +11,14 @@ class Agenda extends StatelessWidget {
         children: [
           Container(
             width: MediaQuery.of(context).size.width * 0.2,
-            color: Colors.transparent, // Color transparente para evitar superposición
+            color: Colors
+                .transparent, // Color transparente para evitar superposición
             child: Image.asset(
               'assets/images/calendario.png',
               fit: BoxFit.cover,
             ),
           ),
           SizedBox(height: 10),
-
           RichText(
             textAlign: TextAlign.center,
             text: TextSpan(
@@ -44,7 +44,6 @@ class Agenda extends StatelessWidget {
             ),
           ),
           SizedBox(height: 10),
-
           GestureDetector(
             onTap: () {
               /*DatePicker.showDatePicker(
@@ -85,6 +84,7 @@ class Agenda extends StatelessWidget {
           ),
         ],
       ),
+      
     );
   }
 }
