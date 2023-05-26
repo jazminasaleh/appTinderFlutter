@@ -35,13 +35,14 @@ class Perfil extends StatelessWidget {
               icon: IconButton(
                 icon: Icon(
                   Icons.home_outlined,
+                  color: Colors.red,
                 ),
                 onPressed: () {},
               ),
               label: ''),
           BottomNavigationBarItem(
               icon: IconButton(
-                icon: Icon(Icons.person_outline),
+                icon: Icon(Icons.person_outline, color: Colors.grey,),
                 onPressed: () {
                   Get.to(Actualizardatos());
                 },
@@ -81,9 +82,10 @@ class CustomCard extends StatelessWidget {
 }
 
 List imagnes = [
-  'https://img.freepik.com/foto-gratis/retrato-hermoso-mujer-joven-posicion-pared-gris_231208-10760.jpg',
+  'https://images.unsplash.com/photo-1552642986-ccb41e7059e7?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=387&q=80',
   'https://www.shutterstock.com/image-photo/young-handsome-man-beard-wearing-260nw-1817367890.jpg',
-  'https://www.shutterstock.com/image-photo/happy-positive-handsome-old-man-260nw-2136574865.jpg'
+  'https://www.shutterstock.com/image-photo/happy-positive-handsome-old-man-260nw-2136574865.jpg',
+  'https://images.unsplash.com/photo-1600804889194-e6fbf08ddb39?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=465&q=80'
 ];
 
 class _Card extends StatefulWidget {

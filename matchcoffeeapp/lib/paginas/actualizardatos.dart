@@ -31,7 +31,7 @@ class Actualizardatos extends StatelessWidget {
                           color: Colors.black,
                           image:DecorationImage(
                               fit: BoxFit.cover,
-                              image:NetworkImage('assets/images/perfil-mujer-vivo.png')
+                              image:NetworkImage('assets/images/foto.jpg')
                           ),
                           borderRadius: BorderRadius.circular(15),
                           boxShadow: [
@@ -110,8 +110,8 @@ class Actualizardatos extends StatelessWidget {
         type:BottomNavigationBarType.fixed,
         selectedItemColor: Colors.red,
         items: [
-          BottomNavigationBarItem(icon: IconButton(icon: Icon(Icons.home_outlined), onPressed: () { Get.to(Perfil());},),label:'',),
-          BottomNavigationBarItem(icon: Icon(Icons.person_outline),label:''),
+          BottomNavigationBarItem(icon: IconButton(icon: Icon(Icons.home_outlined, color: Colors.grey,), onPressed: () { Get.to(Perfil());},),label:'',),
+          BottomNavigationBarItem(icon: Icon(Icons.person_outline, color: Colors.red,),label:''),
         ],
 
       ),);
