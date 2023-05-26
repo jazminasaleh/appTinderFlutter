@@ -48,25 +48,7 @@ class CustomCard extends StatelessWidget {
           Positioned(
             bottom: 0,
             child: Row(
-              children: [
-                GestureDetector(
-                  onTap: () {
-                    Get.to(Citas());
-                  },
-                  child: Container(
-                    width: 50,
-                    height: 50,
-                    decoration: const BoxDecoration(
-                      color: Color(0xff5588a2),
-                      shape: BoxShape.circle,
-                    ),
-                    child: const Icon(
-                      Icons.calendar_month,
-                      color: Colors.white,
-                    ),
-                  ),
-                ),
-              ],
+              children: [],
             ),
           )
         ],
@@ -87,24 +69,21 @@ class _Card extends StatefulWidget {
 }
 
 class _CardState extends State<_Card> {
+  final controller = SwipableStackController();
   @override
   Widget build(
     BuildContext context,
   ) {
     return Scaffold(
-      body:
-          /*Container(
-          height: MediaQuery.of(context).size.height*0.90,
-          width:  MediaQuery.of(context).size.width*0.90,
-          child: SwipeDeck(
-            widgets: imagnes.map((e) => tarjeta(e, context)).toList())
-          ),*/
-
-          Stack(children: [
+      body: Stack(children: [
         SwipableStack(
           allowVerticalSwipe: false,
           itemCount: imagnes.length,
-          builder: (BuildContext context, index) {
+          controller: controller,
+          builder: (BuildContext context, propierties) {
+            
+              //controller.rewind();
+            
             return Container(
               alignment: Alignment.bottomLeft,
               padding: EdgeInsets.all(10),
@@ -113,8 +92,7 @@ class _CardState extends State<_Card> {
               decoration: BoxDecoration(
                 color: Colors.amber,
                 image: DecorationImage(
-                  image: NetworkImage(
-                      imagnes[0]),
+                  image: NetworkImage(imagnes[propierties.index]),
                   fit: BoxFit.cover,
                 ),
                 borderRadius: BorderRadius.circular(15),
@@ -157,7 +135,28 @@ class _CardState extends State<_Card> {
                   ),
                   const SizedBox(
                     height: 80,
-                  )
+                  ),
+                  GestureDetector(
+                    onTap: () {
+                      Get.to(Citas());
+                    },
+                    child: Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          Container(
+                            width: 50,
+                            height: 50,
+                            decoration: const BoxDecoration(
+                              color: Color(0xff5588a2),
+                              shape: BoxShape.circle,
+                            ),
+                            child: const Icon(
+                              Icons.calendar_month,
+                              color: Colors.white,
+                            ),
+                          ),
+                        ]),
+                  ),
                 ],
               ),
             );
@@ -166,60 +165,4 @@ class _CardState extends State<_Card> {
       ]),
     );
   }
-}
-
-Widget tarjeta(String fotos, BuildContext context) {
-  return Container(
-    alignment: Alignment.bottomLeft,
-    padding: EdgeInsets.all(10),
-    width:  MediaQuery.of(context).size.width*0.80,
-    height:  MediaQuery.of(context).size.height*0.80,
-    decoration: BoxDecoration(
-      color: Colors.amber,
-      image: DecorationImage(
-        image: NetworkImage(fotos),
-        fit: BoxFit.cover,
-      ),
-      borderRadius: BorderRadius.circular(15),
-      boxShadow: [
-        BoxShadow(
-          color: Colors.red.withOpacity(0.2),
-          spreadRadius: 6,
-          blurRadius: 8,
-        ),
-      ],
-    ),
-    child: Column(
-      mainAxisSize: MainAxisSize.min,
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        const Text(
-          'Sofia Robledo',
-          style: TextStyle(
-              color: Colors.white, fontSize: 25, fontWeight: FontWeight.bold),
-        ),
-        Container(
-          padding: const EdgeInsets.symmetric(
-            vertical: 5,
-            horizontal: 14,
-          ),
-          margin: const EdgeInsets.only(top: 20),
-          decoration: BoxDecoration(
-            color: Colors.white,
-            borderRadius: BorderRadius.circular(20),
-          ),
-          child: const Text(
-            'Tauro',
-            style: TextStyle(
-              fontSize: 18,
-              fontWeight: FontWeight.bold,
-            ),
-          ),
-        ),
-        const SizedBox(
-          height: 80,
-        )
-      ],
-    ),
-  );
 }
