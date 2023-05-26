@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "890155102452",
+    "firebase_url": "https://match-ucc-default-rtdb.firebaseio.com",
+    "project_id": "match-ucc",
+    "storage_bucket": "match-ucc.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:890155102452:android:77a50374e02f60aebbeea1",
+        "android_client_info": {
+          "package_name": "com.example.matchcoffeeapp"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "890155102452-6v0hos98enp0cfs0062041sbmoa38tcm.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCgzcOU1k48qeC_eg-GoL56e0MFdaLY4Z8"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "890155102452-6v0hos98enp0cfs0062041sbmoa38tcm.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "890155102452-2i736es7sjh9rasj08fet7ups6c2k3m2.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.example.matchcoffeeapp"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
