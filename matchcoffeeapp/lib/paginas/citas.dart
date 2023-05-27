@@ -1,15 +1,26 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:matchcoffeeapp/paginas/perfil.dart';
-//import 'package:flutter_datetime_picker/flutter_datetime_picker.dart';
 import '../controladores/usuario.dart';
 import 'actualizardatos.dart';
 import 'cafes.dart';
 import 'calificacion.dart';
 
-class Citas extends StatelessWidget {
+class Citas extends StatefulWidget {
+  @override
+  State<Citas> createState() => _CitasState();
+}
+
+class _CitasState extends State<Citas> {
   final Usuario usuario = Get.put(Usuario());
+
   final TextEditingController _timeController = TextEditingController();
+
+  DateTime dateTime = DateTime.now();
+
+  String fecha = '';
+
+  String fechaHoy = '';
 
   @override
   Widget build(BuildContext context) {
@@ -60,20 +71,19 @@ class Citas extends StatelessWidget {
                     Expanded(
                       child: GestureDetector(
                         onTap: () {
-                          /*DatePicker.showDatePicker(
-                            context,
-                            showTitleActions: true,
-                            minTime: DateTime(1900, 1, 1),
-                            maxTime: DateTime.now(),
-                            onChanged: (date) {
-                              print('Date selected: $date');
-                            },
-                            onConfirm: (date) {
-                              print('Date selected: $date');
-                            },
-                            currentTime: DateTime.now(),
-                            locale: LocaleType.es,
-                          );*/
+                           fechaHoy ='${dateTime.year}/${dateTime.month}/${dateTime.day}';
+                           showDatePicker(
+                            context: context,
+                            initialDate: DateTime.now(),
+                            firstDate: DateTime(1900),
+                            lastDate: DateTime(2025))
+                        .then((value) {
+                      setState(() {
+                        dateTime = value!;
+                        fecha =
+                            '${dateTime.year}/${dateTime.month}/${dateTime.day}';
+                      });
+                    });
                         },
                         child: Container(
                           decoration: BoxDecoration(
@@ -86,8 +96,9 @@ class Citas extends StatelessWidget {
                             children: [
                               Icon(Icons.calendar_today),
                               SizedBox(width: 20),
-                              Text(
-                                'Fecha',
+                              Text(fecha == fechaHoy
+                                ? 'Fecha'
+                                : fecha,
                                 style: TextStyle(
                                   color: Colors.grey,
                                   fontWeight: FontWeight.bold,

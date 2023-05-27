@@ -15,6 +15,7 @@ class Intro extends StatelessWidget {
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
+               SizedBox(height: MediaQuery.of(context).size.height*0.10), 
               Center(
                 child: Image.asset(
                   'assets/images/logo-intro.png',
@@ -32,7 +33,7 @@ class Intro extends StatelessWidget {
                 'Un espacio para amantes del café y las buenas conversaciones',
                 textAlign: TextAlign.center, // Centra horizontalmente el texto
               ),
-              SizedBox(height: 20), // Agrega un espacio de 20px entre el texto y el botón
+              SizedBox(height: MediaQuery.of(context).size.height*0.20), // Agrega un espacio de 20px entre el texto y el botón
               ElevatedButton(
                 onPressed: () {
                   Get.to(Login());

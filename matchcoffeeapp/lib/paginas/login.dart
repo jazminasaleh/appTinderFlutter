@@ -116,7 +116,7 @@ class _LoginState extends State<Login> {
                       ],
                     ),
                   
-                  SizedBox(height: 40),
+                  SizedBox(height: MediaQuery.of(context).size.height*0.05),
                   Container(
                     width: MediaQuery.of(context).size.width * 0.90,
                     child: TextFormField(

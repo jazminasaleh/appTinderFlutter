@@ -1,17 +1,20 @@
-import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-//import 'package:flutter_datetime_picker/flutter_datetime_picker.dart';
 import '../controladores/usuario.dart';
 import 'package:file_picker/file_picker.dart';
-
 import 'login.dart';
 
-class Segundopasor extends StatelessWidget {
+class Segundopasor extends StatefulWidget {
+  @override
+  State<Segundopasor> createState() => _SegundopasorState();
+}
 
+class _SegundopasorState extends State<Segundopasor> {
   final Usuario usuario = Get.put(Usuario());
 
-
+  DateTime dateTime = DateTime.now();
+  String fecha = '';
+  String fechaHoy = '';
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -30,8 +33,6 @@ class Segundopasor extends StatelessWidget {
                     width: 140,
                   ),
                 ),
-          
-          
                 SizedBox(height: 40),
                 TextField(
                   keyboardType: TextInputType.text,
@@ -53,29 +54,27 @@ class Segundopasor extends StatelessWidget {
                       borderRadius: BorderRadius.circular(18),
                       borderSide: BorderSide(color: Color(0xFFFCCED1)),
                     ),
-                    contentPadding: EdgeInsets.symmetric(vertical: 25, horizontal: 20),
+                    contentPadding:
+                        EdgeInsets.symmetric(vertical: 25, horizontal: 20),
                   ),
                 ),
-          
-               SizedBox(height: 40),
-          
-          
+                SizedBox(height: 40),
                 GestureDetector(
                   onTap: () {
-                    /*DatePicker.showDatePicker(
-                      context,
-                      showTitleActions: true,
-                      minTime: DateTime(1900, 1, 1),
-                      maxTime: DateTime.now(),
-                      onChanged: (date) {
-                        print('Date selected: $date');
-                      },
-                      onConfirm: (date) {
-                        print('Date selected: $date');
-                      },
-                      currentTime: DateTime.now(),
-                      locale: LocaleType.es,
-                    );*/
+                    fechaHoy =
+                        '${dateTime.year}/${dateTime.month}/${dateTime.day}';
+                    showDatePicker(
+                            context: context,
+                            initialDate: DateTime.now(),
+                            firstDate: DateTime(1900),
+                            lastDate: DateTime(2025))
+                        .then((value) {
+                      setState(() {
+                        dateTime = value!;
+                        fecha =
+                            '${dateTime.year}/${dateTime.month}/${dateTime.day}';
+                      });
+                    });
                   },
                   child: Container(
                     decoration: BoxDecoration(
@@ -87,8 +86,9 @@ class Segundopasor extends StatelessWidget {
                       children: [
                         Icon(Icons.calendar_today),
                         SizedBox(width: 20),
-                        Text(
-                          'Fecha de nacimiento',
+                        Text( fecha == fechaHoy
+                        ? 'Fecha de nacimeinto'
+                        : fecha,
                           style: TextStyle(
                             color: Colors.grey,
                             fontWeight: FontWeight.bold,
@@ -98,8 +98,6 @@ class Segundopasor extends StatelessWidget {
                     ),
                   ),
                 ),
-          
-          
                 SizedBox(height: 40),
                 DropdownButtonFormField<String>(
                   value: 'Aries', // valor predeterminado
@@ -118,9 +116,10 @@ class Segundopasor extends StatelessWidget {
                       borderRadius: BorderRadius.circular(18),
                       borderSide: BorderSide(color: Color(0xFFFCCED1)),
                     ),
-                    contentPadding: EdgeInsets.symmetric(vertical: 25, horizontal: 20),
+                    contentPadding:
+                        EdgeInsets.symmetric(vertical: 25, horizontal: 20),
                   ),
-          
+
                   items: <String>[
                     'Aries',
                     'Tauro',
@@ -145,10 +144,6 @@ class Segundopasor extends StatelessWidget {
                     print('Signo seleccionado seleccionado: $value');
                   },
                 ),
-          
-          
-          
-          
                 SizedBox(height: 40),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.center,
@@ -164,16 +159,19 @@ class Segundopasor extends StatelessWidget {
                           style: TextStyle(
                             fontSize: 16,
                             color: Color(0xFFE24E59), // Nuevo color de texto
-                            fontWeight: FontWeight.bold, // agregando el fontWeight bold
+                            fontWeight:
+                                FontWeight.bold, // agregando el fontWeight bold
                           ),
                         ),
                         style: ElevatedButton.styleFrom(
                           padding: EdgeInsets.symmetric(vertical: 30),
-                          backgroundColor: Colors.white, // Cambiar el color de fondo a blanco
+                          backgroundColor: Colors
+                              .white, // Cambiar el color de fondo a blanco
                           shape: RoundedRectangleBorder(
                             borderRadius: BorderRadius.circular(18),
                             side: BorderSide(
-                              color: Color(0xFFF1858D), // Agregar borde de color #F1858D
+                              color: Color(
+                                  0xFFF1858D), // Agregar borde de color #F1858D
                               width: 2, // Ancho del borde
                             ),
                           ),
@@ -192,12 +190,14 @@ class Segundopasor extends StatelessWidget {
                           style: TextStyle(
                             fontSize: 16,
                             color: Colors.white, // Nuevo color de texto
-                            fontWeight: FontWeight.bold, // agregando el fontWeight bold
+                            fontWeight:
+                                FontWeight.bold, // agregando el fontWeight bold
                           ),
                         ),
                         style: ElevatedButton.styleFrom(
                           padding: EdgeInsets.symmetric(vertical: 30),
-                          backgroundColor: Color(0xFFE24E59), // Cambiar el color de fondo a blanco
+                          backgroundColor: Color(
+                              0xFFE24E59), // Cambiar el color de fondo a blanco
                           shape: RoundedRectangleBorder(
                             borderRadius: BorderRadius.circular(18),
                           ),
@@ -208,7 +208,8 @@ class Segundopasor extends StatelessWidget {
                 ),
                 SizedBox(height: 40),
                 Container(
-                  margin: EdgeInsets.only(bottom: 20.0), // Margen inferior de 20px
+                  margin:
+                      EdgeInsets.only(bottom: 20.0), // Margen inferior de 20px
                   decoration: BoxDecoration(
                     border: Border.all(
                       color: Color(0xFFE24E59),
@@ -217,11 +218,13 @@ class Segundopasor extends StatelessWidget {
                     borderRadius: BorderRadius.circular(8.0),
                   ),
                   child: Padding(
-                    padding: EdgeInsets.all(10.0), // Padding de 20px en todos los lados
+                    padding: EdgeInsets.all(
+                        10.0), // Padding de 20px en todos los lados
                     child: TextButton(
                       onPressed: () async {
                         print("prueba");
-                        final file = await FilePicker.platform.pickFiles(type: FileType.any);
+                        final file = await FilePicker.platform
+                            .pickFiles(type: FileType.any);
                         if (file != null) {
                           print(file.files.single.name);
                           final fileName = file.files.single.name;
@@ -241,9 +244,8 @@ class Segundopasor extends StatelessWidget {
                     ),
                   ),
                 ),
-          
-                Obx(() => Text("Archivo seleccionado: ${usuario.guardarfile.value}")),
-          
+                Obx(() =>
+                    Text("Archivo seleccionado: ${usuario.guardarfile.value}")),
                 SizedBox(height: 40),
                 SizedBox(
                   width: double.infinity,
@@ -253,7 +255,7 @@ class Segundopasor extends StatelessWidget {
                       padding: EdgeInsets.symmetric(vertical: 26),
                       shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(16),
-                      ),//aumento del padding
+                      ), //aumento del padding
                     ),
                     onPressed: () {
                       Get.to(Login());

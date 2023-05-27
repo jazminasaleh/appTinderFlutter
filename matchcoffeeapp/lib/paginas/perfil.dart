@@ -23,7 +23,7 @@ class Perfil extends StatelessWidget {
                 height: MediaQuery.of(context).size.height * 0.10,
               ),
               CustomCard(),
-              SizedBox(height: MediaQuery.of(context).size.height*0.20,)
+              
             ],
           ),
         ),

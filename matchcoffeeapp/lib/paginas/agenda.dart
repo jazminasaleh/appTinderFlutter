@@ -1,7 +1,18 @@
 import 'package:flutter/material.dart';
 //import 'package:flutter_datetime_picker/flutter_datetime_picker.dart';
 
-class Agenda extends StatelessWidget {
+class Agenda extends StatefulWidget {
+  @override
+  State<Agenda> createState() => _AgendaState();
+}
+
+class _AgendaState extends State<Agenda> {
+  DateTime dateTime = DateTime.now();
+
+  String fecha = '';
+
+  String fechaHoy = '';
+
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -46,20 +57,18 @@ class Agenda extends StatelessWidget {
           SizedBox(height: 10),
           GestureDetector(
             onTap: () {
-              /*DatePicker.showDatePicker(
-                context,
-                showTitleActions: true,
-                minTime: DateTime(1900, 1, 1),
-                maxTime: DateTime.now(),
-                onChanged: (date) {
-                  print('Date selected: $date');
-                },
-                onConfirm: (date) {
-                  print('Date selected: $date');
-                },
-                currentTime: DateTime.now(),
-                locale: LocaleType.es,
-              );*/
+               fechaHoy ='${dateTime.year}/${dateTime.month}/${dateTime.day}';
+                showDatePicker(
+                  context: context,
+                  initialDate: DateTime.now(),
+                  firstDate: DateTime(1900),
+                  lastDate: DateTime(2025))
+                  .then((value) {
+                    setState(() {
+                      dateTime = value!;
+                      fecha ='${dateTime.year}/${dateTime.month}/${dateTime.day}';
+                    });
+                  });
             },
             child: Container(
               decoration: BoxDecoration(
@@ -71,8 +80,9 @@ class Agenda extends StatelessWidget {
                 children: [
                   Icon(Icons.calendar_today),
                   SizedBox(width: 20),
-                  Text(
-                    'Fecha de invitación',
+                  Text( fecha == fechaHoy
+                  ? 'Fecha de invitación'
+                  : fecha,
                     style: TextStyle(
                       color: Colors.grey,
                       fontWeight: FontWeight.bold,
