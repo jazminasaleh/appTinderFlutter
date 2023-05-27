@@ -2,7 +2,7 @@ import 'package:get/get.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 
-import '../paginas/perfil.dart';
+import '../pages/perfil.dart';
 
 class Usuario extends GetxController{
   var count = 0.obs;
@@ -32,7 +32,7 @@ class Usuario extends GetxController{
       }
 
     }
-    Get.to(Perfil());
+    //Get.to(Perfil());
   }
 
   registrarse () async {

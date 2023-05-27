@@ -1,11 +1,13 @@
 import 'package:flutter/material.dart';
 
-class UsariosProvider extends ChangeNotifier{
+class UsariosProvider extends ChangeNotifier {
   GlobalKey<FormState> formKey = new GlobalKey();
   String email = '';
   String password = '';
   String name = '';
-  String number = '';
+  String date = '';
+  String zodiacSign = '';
+  String gender = '';
   String? foto;
 
   bool _isLoading = false;

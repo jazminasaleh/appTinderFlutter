@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:matchcoffeeapp/paginas/perfil.dart';
+import 'package:matchcoffeeapp/pages/perfil.dart';
+import 'package:matchcoffeeapp/services/firestore_services.dart';
 import '../controladores/usuario.dart';
 import 'actualizardatos.dart';
 import 'cafes.dart';
@@ -15,7 +16,7 @@ class _CitasState extends State<Citas> {
   final Usuario usuario = Get.put(Usuario());
 
   final TextEditingController _timeController = TextEditingController();
-
+  UsuariosSerivices usuariosServices = new UsuariosSerivices();
   DateTime dateTime = DateTime.now();
 
   String fecha = '';
@@ -71,34 +72,34 @@ class _CitasState extends State<Citas> {
                     Expanded(
                       child: GestureDetector(
                         onTap: () {
-                           fechaHoy ='${dateTime.year}/${dateTime.month}/${dateTime.day}';
-                           showDatePicker(
-                            context: context,
-                            initialDate: DateTime.now(),
-                            firstDate: DateTime(1900),
-                            lastDate: DateTime(2025))
-                        .then((value) {
-                      setState(() {
-                        dateTime = value!;
-                        fecha =
-                            '${dateTime.year}/${dateTime.month}/${dateTime.day}';
-                      });
-                    });
+                          fechaHoy =
+                              '${dateTime.year}/${dateTime.month}/${dateTime.day}';
+                          showDatePicker(
+                                  context: context,
+                                  initialDate: DateTime.now(),
+                                  firstDate: DateTime(1900),
+                                  lastDate: DateTime(2025))
+                              .then((value) {
+                            setState(() {
+                              dateTime = value!;
+                              fecha =
+                                  '${dateTime.year}/${dateTime.month}/${dateTime.day}';
+                            });
+                          });
                         },
                         child: Container(
                           decoration: BoxDecoration(
                             border: Border.all(color: Color(0xFF5387A2)),
                             borderRadius: BorderRadius.circular(18),
                           ),
-                          padding:
-                              EdgeInsets.symmetric(vertical: 25, horizontal: 20),
+                          padding: EdgeInsets.symmetric(
+                              vertical: 25, horizontal: 20),
                           child: Row(
                             children: [
                               Icon(Icons.calendar_today),
                               SizedBox(width: 20),
-                              Text(fecha == fechaHoy
-                                ? 'Fecha'
-                                : fecha,
+                              Text(
+                                fecha == fechaHoy ? 'Fecha' : fecha,
                                 style: TextStyle(
                                   color: Colors.grey,
                                   fontWeight: FontWeight.bold,
@@ -147,7 +148,8 @@ class _CitasState extends State<Citas> {
                   width: double.infinity,
                   child: ElevatedButton(
                     style: ElevatedButton.styleFrom(
-                      primary: Colors.white, // Cambiar el color de fondo a blanco
+                      primary:
+                          Colors.white, // Cambiar el color de fondo a blanco
                       onPrimary: Color(
                           0xFF5387A2), // Cambiar el color del texto e icono a 0xFF5387A2
                       padding: EdgeInsets.symmetric(vertical: 26),
@@ -188,7 +190,7 @@ class _CitasState extends State<Citas> {
                   ),
                 ),
                 SizedBox(height: 40),
-          
+
                 /* TextFormField(
                   controller: _textInputController,
                   decoration: InputDecoration(
@@ -275,7 +277,7 @@ class _CitasState extends State<Citas> {
                   color: Colors.grey,
                 ),
                 onPressed: () {
-                  Get.to(Perfil());
+                  Get.to(Perfil(usuariosSerivices: usuariosServices,));
                 },
               ),
               label: ''),

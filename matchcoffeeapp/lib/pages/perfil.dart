@@ -1,15 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:matchcoffeeapp/paginas/actualizardatos.dart';
-import 'package:swipe_deck/swipe_deck.dart';
-
-import 'agenda.dart';
+import 'package:matchcoffeeapp/pages/actualizardatos.dart';
+import 'package:matchcoffeeapp/services/firestore_services.dart';
 import 'citas.dart';
 import 'package:swipable_stack/swipable_stack.dart';
 
 class Perfil extends StatelessWidget {
-  const Perfil({super.key});
-
+  UsuariosSerivices usuariosSerivices;
+  Perfil({required this.usuariosSerivices});
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -22,8 +20,9 @@ class Perfil extends StatelessWidget {
               SizedBox(
                 height: MediaQuery.of(context).size.height * 0.10,
               ),
-              CustomCard(),
-              
+              CustomCard(
+                usuariosSerivices: usuariosSerivices,
+              ),
             ],
           ),
         ),
@@ -43,7 +42,10 @@ class Perfil extends StatelessWidget {
               label: ''),
           BottomNavigationBarItem(
               icon: IconButton(
-                icon: Icon(Icons.person_outline, color: Colors.grey,),
+                icon: Icon(
+                  Icons.person_outline,
+                  color: Colors.grey,
+                ),
                 onPressed: () {
                   Get.to(Actualizardatos());
                 },
@@ -56,9 +58,8 @@ class Perfil extends StatelessWidget {
 }
 
 class CustomCard extends StatelessWidget {
-  const CustomCard({
-    super.key,
-  });
+  UsuariosSerivices usuariosSerivices;
+  CustomCard({required this.usuariosSerivices});
 
   @override
   Widget build(BuildContext context) {
@@ -69,7 +70,7 @@ class CustomCard extends StatelessWidget {
       child: Stack(
         alignment: Alignment.center,
         children: [
-          _Card(),
+          _Card(usuariosSerivices: usuariosSerivices,),
           Positioned(
             bottom: 0,
             child: Row(
@@ -90,24 +91,33 @@ List imagnes = [
 ];
 
 class _Card extends StatefulWidget {
+  UsuariosSerivices usuariosSerivices;
+  _Card({required this.usuariosSerivices});
   @override
-  State<_Card> createState() => _CardState();
+  State<_Card> createState() => _CardState(usuariosSerivices: usuariosSerivices);
 }
 
 class _CardState extends State<_Card> {
+  UsuariosSerivices usuariosSerivices;
+  _CardState({required this.usuariosSerivices});
   final controller = SwipableStackController();
+
   @override
   Widget build(
     BuildContext context,
   ) {
+    print('uno ${usuariosSerivices.usuarios}');
     return Scaffold(
       body: Stack(children: [
         SwipableStack(
           allowVerticalSwipe: false,
-          itemCount: imagnes.length,
+          itemCount: 4,
           controller: controller,
           builder: (BuildContext context, propierties) {
             ///*controller.rewind();
+            print('index ${propierties.index}');
+            print(
+                'usuario ${usuariosSerivices.usuarios[propierties.index]['nombre']}');
             return Container(
               alignment: Alignment.bottomLeft,
               padding: EdgeInsets.all(10),
@@ -132,8 +142,8 @@ class _CardState extends State<_Card> {
                 mainAxisSize: MainAxisSize.min,
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  const Text(
-                    'Sofia Robledo',
+                  Text(
+                    '${usuariosSerivices.usuarios[propierties.index]['nombre']}',
                     style: TextStyle(
                         color: Colors.white,
                         fontSize: 25,

@@ -3,8 +3,9 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:image_picker/image_picker.dart';
-import 'package:matchcoffeeapp/paginas/login.dart';
-import 'package:matchcoffeeapp/paginas/perfil.dart';
+import 'package:matchcoffeeapp/pages/login.dart';
+import 'package:matchcoffeeapp/pages/perfil.dart';
+import 'package:matchcoffeeapp/services/firestore_services.dart';
 
 class Actualizardatos extends StatefulWidget {
   @override
@@ -32,6 +33,7 @@ class _ActualizardatosState extends State<Actualizardatos> {
     });
   }
 
+  UsuariosSerivices usuariosServices = new UsuariosSerivices();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -46,7 +48,6 @@ class _ActualizardatosState extends State<Actualizardatos> {
                   Stack(
                     alignment: Alignment.center,
                     children: [
-                      
                       Container(
                           height: 170,
                           width: 170,
@@ -147,16 +148,26 @@ class _ActualizardatosState extends State<Actualizardatos> {
                       )
                     ],
                   ),
-                  SizedBox(height: MediaQuery.of(context).size.height*0.10,),
+                  SizedBox(
+                    height: MediaQuery.of(context).size.height * 0.10,
+                  ),
                   Row(
                     children: [
                       IconButton(
                           onPressed: () {
                             Get.to(Login());
                           },
-                          icon: Icon(Icons.logout_outlined, color: Colors.red, size: 30,)
-                      ),
-                      TextButton(onPressed: () => Get.to(Login()), child: Text('Cerrar sesion', style: TextStyle(color: Colors.black, fontSize: 18),))
+                          icon: Icon(
+                            Icons.logout_outlined,
+                            color: Colors.red,
+                            size: 30,
+                          )),
+                      TextButton(
+                          onPressed: () => Get.to(Login()),
+                          child: Text(
+                            'Cerrar sesion',
+                            style: TextStyle(color: Colors.black, fontSize: 18),
+                          ))
                     ],
                   )
                 ],
@@ -176,7 +187,7 @@ class _ActualizardatosState extends State<Actualizardatos> {
                 color: Colors.grey,
               ),
               onPressed: () {
-                Get.to(Perfil());
+                Get.to(Perfil(usuariosSerivices: usuariosServices,));
               },
             ),
             label: '',

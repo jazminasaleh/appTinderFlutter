@@ -1,17 +1,20 @@
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
-import 'package:matchcoffeeapp/paginas/intro.dart';
+import 'package:matchcoffeeapp/pages/intro.dart';
 import 'package:get/get.dart';
+import 'package:matchcoffeeapp/pages/perfil.dart';
 import 'package:matchcoffeeapp/provider/usuarios_provider.dart';
+import 'package:matchcoffeeapp/services/firestore_services.dart';
 import 'package:provider/provider.dart';
 
+import 'firebase_options.dart';
 
 void main() async {
-  /*await Firebase.initializeApp(
+  WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,
-  );*/
-  runApp(
-    Estados()
   );
+  runApp(Estados());
 }
 
 class Estados extends StatelessWidget {
@@ -20,6 +23,7 @@ class Estados extends StatelessWidget {
     return MultiProvider(
       providers: [
         ChangeNotifierProvider(create: (_) => UsariosProvider()),
+        ChangeNotifierProvider(create: (_) => UsuariosSerivices()),
       ],
       child: MyApp(),
     );
@@ -38,7 +42,6 @@ class MyApp extends StatelessWidget {
         'home': (BuildContext context) => Intro(),
       },
       theme: ThemeData(primaryColor: Colors.red),
-      
     );
   }
 }

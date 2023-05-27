@@ -1,12 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:matchcoffeeapp/paginas/login.dart';
+import 'package:matchcoffeeapp/pages/login.dart';
+import 'package:matchcoffeeapp/services/firestore_services.dart';
 
 class Intro extends StatelessWidget {
-  const Intro();
-
+  UsuariosSerivices usuariosServices = new UsuariosSerivices();
   @override
   Widget build(BuildContext context) {
+    print('dos ${usuariosServices.usuarios}');
     return Scaffold(
       backgroundColor: Color(0xFFFDF4F5),
       body: Padding(
@@ -15,27 +16,40 @@ class Intro extends StatelessWidget {
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-               SizedBox(height: MediaQuery.of(context).size.height*0.10), 
+              SizedBox(height: MediaQuery.of(context).size.height * 0.10),
               Center(
                 child: Image.asset(
                   'assets/images/logo-intro.png',
                   width: MediaQuery.of(context).size.width * 0.4,
                 ),
               ),
-              SizedBox(height: 20), // Agrega un espacio de 20px entre la imagen y el texto
+              SizedBox(
+                  height:
+                      20), // Agrega un espacio de 20px entre la imagen y el texto
               Text(
                 '¡Bienvenido a Match Coffee!',
                 textAlign: TextAlign.center, // Centra horizontalmente el texto
                 style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
               ),
-              SizedBox(height: 10), // Agrega un espacio de 10px entre el texto y el resto de los elementos
+              SizedBox(
+                  height:
+                      10), // Agrega un espacio de 10px entre el texto y el resto de los elementos
               Text(
                 'Un espacio para amantes del café y las buenas conversaciones',
                 textAlign: TextAlign.center, // Centra horizontalmente el texto
               ),
-              SizedBox(height: MediaQuery.of(context).size.height*0.20), // Agrega un espacio de 20px entre el texto y el botón
+              SizedBox(
+                  height: MediaQuery.of(context).size.height *
+                      0.20), // Agrega un espacio de 20px entre el texto y el botón
               ElevatedButton(
                 onPressed: () {
+                 
+                  print('mi lista a ${usuariosServices.usuarios[0]['nombre']}');
+
+                  print('lista de mis usuarios ${usuariosServices.usuarios}');
+                  for (var i = 0; i < usuariosServices.usuarios.length; i++) {
+                    print('${usuariosServices.usuarios[i]}');
+                  }
                   Get.to(Login());
                 },
                 style: ElevatedButton.styleFrom(
@@ -43,12 +57,12 @@ class Intro extends StatelessWidget {
                   minimumSize: Size(300, 50),
                   padding: EdgeInsets.symmetric(vertical: 26),
                   shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(16), // Cambia el valor de 20 según el radio que desees
+                    borderRadius: BorderRadius.circular(
+                        16), // Cambia el valor de 20 según el radio que desees
                   ),
                 ),
                 child: Text('Seguir'),
               ),
-        
             ],
           ),
         ),
@@ -56,4 +70,3 @@ class Intro extends StatelessWidget {
     );
   }
 }
-

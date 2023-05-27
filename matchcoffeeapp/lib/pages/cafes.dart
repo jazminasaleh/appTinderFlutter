@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:matchcoffeeapp/paginas/actualizardatos.dart';
-import 'package:matchcoffeeapp/paginas/citas.dart';
-import 'package:matchcoffeeapp/paginas/perfil.dart';
+import 'package:matchcoffeeapp/pages/actualizardatos.dart';
+import 'package:matchcoffeeapp/pages/citas.dart';
+import 'package:matchcoffeeapp/pages/perfil.dart';
+import 'package:matchcoffeeapp/services/firestore_services.dart';
 
 class Cafes extends StatelessWidget {
+  UsuariosSerivices usuarios = new UsuariosSerivices();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -122,7 +124,7 @@ class Cafes extends StatelessWidget {
                 color: Colors.grey,
               ),
               onPressed: () {
-                Get.to(Perfil());
+                Get.to(Perfil(usuariosSerivices: usuarios,));
               },
             ),
             label: '',

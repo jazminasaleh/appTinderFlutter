@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:matchcoffeeapp/paginas/login.dart';
-import 'package:matchcoffeeapp/paginas/segundopasor.dart';
+import 'package:matchcoffeeapp/pages/login.dart';
+import 'package:matchcoffeeapp/pages/segundopasor.dart';
 import 'package:provider/provider.dart';
 
 import '../provider/usuarios_provider.dart';

@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:matchcoffeeapp/paginas/actualizardatos.dart';
-import 'package:matchcoffeeapp/paginas/perfil.dart';
+import 'package:matchcoffeeapp/pages/actualizardatos.dart';
+import 'package:matchcoffeeapp/pages/perfil.dart';
+import 'package:matchcoffeeapp/services/firestore_services.dart';
 
 class RatingScreen extends StatefulWidget {
   const RatingScreen({super.key});
@@ -12,7 +13,7 @@ class RatingScreen extends StatefulWidget {
 
 class _RatingScreenState extends State<RatingScreen> {
   final _focusNode = FocusNode();
-
+  UsuariosSerivices usuariosSerivices = new UsuariosSerivices();
   List<bool> isActive = [
     true,
     true,
@@ -241,7 +242,7 @@ class _RatingScreenState extends State<RatingScreen> {
         type:BottomNavigationBarType.fixed,
         selectedItemColor: Colors.red,
         items: [
-          BottomNavigationBarItem(icon: IconButton(icon: Icon(Icons.home_outlined, color: Colors.grey,), onPressed: () { Get.to(Perfil());},),label:'',),
+          BottomNavigationBarItem(icon: IconButton(icon: Icon(Icons.home_outlined, color: Colors.grey,), onPressed: () { Get.to(Perfil(usuariosSerivices: usuariosSerivices,));},),label:'',),
           BottomNavigationBarItem(icon: IconButton(icon: Icon(Icons.person_outline), color: Colors.green, onPressed: () { Get.to(Actualizardatos()); },),label:''),
         ],
 
