@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:matchcoffeeapp/services/firestore_services.dart';
 import 'package:provider/provider.dart';
 import '../controladores/usuario.dart';
 import 'package:file_picker/file_picker.dart';
@@ -21,6 +22,8 @@ class _SegundopasorState extends State<Segundopasor> {
   @override
   Widget build(BuildContext context) {
     final usuariosProvier = Provider.of<UsariosProvider>(context);
+    final usuariosServices = Provider.of<UsuariosSerivices>(context);
+    print(' fecha mia ${usuariosProvier.email}');
     return Scaffold(
       backgroundColor: Colors.white, // agregar esta línea
       body: Padding(
@@ -74,7 +77,7 @@ class _SegundopasorState extends State<Segundopasor> {
                   GestureDetector(
                     onTap: () {
                       fechaHoy =
-                          '${dateTime.year}/${dateTime.month}/${dateTime.day}';
+                          '${dateTime.day}/${dateTime.month}/${dateTime.year}';
                       showDatePicker(
                               context: context,
                               initialDate: DateTime.now(),
@@ -84,7 +87,7 @@ class _SegundopasorState extends State<Segundopasor> {
                         setState(() {
                           dateTime = value!;
                           fecha =
-                              '${dateTime.year}/${dateTime.month}/${dateTime.day}';
+                            '${dateTime.day}/${dateTime.month}/${dateTime.year}';
                           usuariosProvier.date = fecha;
                         });
                       });
@@ -155,7 +158,6 @@ class _SegundopasorState extends State<Segundopasor> {
                     onChanged: (value) {
                       // hacer algo cuando el valor seleccionado cambie
                       signoZodiacal = value!;
-                      print('Signo seleccionado seleccionado: $signoZodiacal');
                     },
                   ),
                   SizedBox(height: 40),
@@ -301,6 +303,19 @@ class _SegundopasorState extends State<Segundopasor> {
                         ), //aumento del padding
                       ),
                       onPressed: () {
+                        //*Agregar la informacion tambien a la parte de iniciar sesion
+                        if (signoZodiacal == '') {
+                          usuariosProvier.zodiacSign = 'Aries';
+                        } else {
+                          usuariosProvier.zodiacSign = signoZodiacal;
+                        }
+                        usuariosServices.addUser(
+                            usuariosProvier.date,
+                            usuariosProvier.email,
+                            'https://i.pinimg.com/736x/1f/b6/e5/1fb6e5f12b3b163463ee33fd7a3df4ad.jpg',
+                            genero,
+                            usuariosProvier.name,
+                            usuariosProvier.zodiacSign);
                         Get.to(Login());
                       },
                       child: Text(

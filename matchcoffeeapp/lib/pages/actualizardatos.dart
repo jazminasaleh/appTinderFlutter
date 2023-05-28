@@ -6,6 +6,9 @@ import 'package:image_picker/image_picker.dart';
 import 'package:matchcoffeeapp/pages/login.dart';
 import 'package:matchcoffeeapp/pages/perfil.dart';
 import 'package:matchcoffeeapp/services/firestore_services.dart';
+import 'package:provider/provider.dart';
+
+import '../provider/usuarios_provider.dart';
 
 class Actualizardatos extends StatefulWidget {
   @override
@@ -33,9 +36,17 @@ class _ActualizardatosState extends State<Actualizardatos> {
     });
   }
 
-  UsuariosSerivices usuariosServices = new UsuariosSerivices();
   @override
   Widget build(BuildContext context) {
+    String nomUusraio = '', fechaNacieminto = '';
+    final usuariosProvier = Provider.of<UsariosProvider>(context);
+    final usuariosServices = Provider.of<UsuariosSerivices>(context);
+    for (var i = 0; i < usuariosServices.usuarios.length; i++) {
+      if (usuariosServices.usuarios[i]['email'] == usuariosProvier.email) {
+        nomUusraio = '${usuariosServices.usuarios[i]['nombre']}';
+        fechaNacieminto = '${usuariosServices.usuarios[i]['date']}';
+      }
+    }
     return Scaffold(
       body: Center(
         child: Padding(
@@ -95,7 +106,7 @@ class _ActualizardatosState extends State<Actualizardatos> {
                       ),
                       Spacer(),
                       Text(
-                        'monica R',
+                        '$nomUusraio',
                         style: TextStyle(fontWeight: FontWeight.bold),
                       )
                     ],
@@ -111,23 +122,7 @@ class _ActualizardatosState extends State<Actualizardatos> {
                       ),
                       Spacer(),
                       Text(
-                        'alilondo@gmail.com',
-                        style: TextStyle(fontWeight: FontWeight.bold),
-                      )
-                    ],
-                  ),
-                  SizedBox(
-                    height: 25,
-                  ),
-                  Row(
-                    children: [
-                      Text(
-                        'celular',
-                        style: TextStyle(color: Colors.grey),
-                      ),
-                      Spacer(),
-                      Text(
-                        '+57 3005964565',
+                        '${usuariosProvier.email}',
                         style: TextStyle(fontWeight: FontWeight.bold),
                       )
                     ],
@@ -143,7 +138,7 @@ class _ActualizardatosState extends State<Actualizardatos> {
                       ),
                       Spacer(),
                       Text(
-                        '16.06.1955',
+                        '$fechaNacieminto',
                         style: TextStyle(fontWeight: FontWeight.bold),
                       )
                     ],
@@ -187,7 +182,9 @@ class _ActualizardatosState extends State<Actualizardatos> {
                 color: Colors.grey,
               ),
               onPressed: () {
-                Get.to(Perfil(usuariosSerivices: usuariosServices,));
+                Get.to(Perfil(
+                  usuariosSerivices: usuariosServices,
+                ));
               },
             ),
             label: '',

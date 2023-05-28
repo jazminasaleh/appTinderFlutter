@@ -70,7 +70,9 @@ class CustomCard extends StatelessWidget {
       child: Stack(
         alignment: Alignment.center,
         children: [
-          _Card(usuariosSerivices: usuariosSerivices,),
+          _Card(
+            usuariosSerivices: usuariosSerivices,
+          ),
           Positioned(
             bottom: 0,
             child: Row(
@@ -83,18 +85,12 @@ class CustomCard extends StatelessWidget {
   }
 }
 
-List imagnes = [
-  'https://images.unsplash.com/photo-1552642986-ccb41e7059e7?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=387&q=80',
-  'https://www.shutterstock.com/image-photo/young-handsome-man-beard-wearing-260nw-1817367890.jpg',
-  'https://www.shutterstock.com/image-photo/happy-positive-handsome-old-man-260nw-2136574865.jpg',
-  'https://images.unsplash.com/photo-1600804889194-e6fbf08ddb39?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=465&q=80'
-];
-
 class _Card extends StatefulWidget {
   UsuariosSerivices usuariosSerivices;
   _Card({required this.usuariosSerivices});
   @override
-  State<_Card> createState() => _CardState(usuariosSerivices: usuariosSerivices);
+  State<_Card> createState() =>
+      _CardState(usuariosSerivices: usuariosSerivices);
 }
 
 class _CardState extends State<_Card> {
@@ -106,18 +102,14 @@ class _CardState extends State<_Card> {
   Widget build(
     BuildContext context,
   ) {
-    print('uno ${usuariosSerivices.usuarios}');
     return Scaffold(
       body: Stack(children: [
         SwipableStack(
           allowVerticalSwipe: false,
-          itemCount: 4,
+          itemCount: usuariosSerivices.usuarios.length,
           controller: controller,
           builder: (BuildContext context, propierties) {
             ///*controller.rewind();
-            print('index ${propierties.index}');
-            print(
-                'usuario ${usuariosSerivices.usuarios[propierties.index]['nombre']}');
             return Container(
               alignment: Alignment.bottomLeft,
               padding: EdgeInsets.all(10),
@@ -126,7 +118,8 @@ class _CardState extends State<_Card> {
               decoration: BoxDecoration(
                 color: Colors.amber,
                 image: DecorationImage(
-                  image: NetworkImage(imagnes[propierties.index]),
+                  image: NetworkImage(
+                      '${usuariosSerivices.usuarios[propierties.index]['foto']}'),
                   fit: BoxFit.cover,
                 ),
                 borderRadius: BorderRadius.circular(15),
@@ -159,8 +152,8 @@ class _CardState extends State<_Card> {
                       color: Colors.white,
                       borderRadius: BorderRadius.circular(20),
                     ),
-                    child: const Text(
-                      'Tauro',
+                    child: Text(
+                      '${usuariosSerivices.usuarios[propierties.index]['signo']}',
                       style: TextStyle(
                         fontSize: 18,
                         fontWeight: FontWeight.bold,
@@ -172,7 +165,7 @@ class _CardState extends State<_Card> {
                   ),
                   GestureDetector(
                     onTap: () {
-                      Get.to(Citas());
+                      Get.to(Citas(nombre: '${usuariosSerivices.usuarios[propierties.index]['nombre']}',));
                     },
                     child: Row(
                         mainAxisAlignment: MainAxisAlignment.center,

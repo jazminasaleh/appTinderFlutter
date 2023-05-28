@@ -6,6 +6,8 @@ import 'package:matchcoffeeapp/pages/perfil.dart';
 import 'package:matchcoffeeapp/services/firestore_services.dart';
 
 class Cafes extends StatelessWidget {
+  String nombre;
+  Cafes({required this.nombre});
   UsuariosSerivices usuarios = new UsuariosSerivices();
   @override
   Widget build(BuildContext context) {
@@ -50,7 +52,7 @@ class Cafes extends StatelessWidget {
                   children: [
                     InkWell(
                       onTap: () {
-                        Get.to(Citas());
+                        Get.to(Citas(nombre: nombre,));
                       },
                       child: Column(
                         children: [
@@ -63,7 +65,7 @@ class Cafes extends StatelessWidget {
                     ),
                     InkWell(
                       onTap: () {
-                        Get.to(Citas());
+                        Get.to(Citas(nombre: nombre,));
                       },
                       child: Column(
                         children: [
@@ -82,7 +84,7 @@ class Cafes extends StatelessWidget {
                   children: [
                     InkWell(
                       onTap: () {
-                        Get.to(Citas());
+                        Get.to(Citas(nombre: nombre,));
                       },
                       child: Column(
                         children: [
@@ -95,7 +97,7 @@ class Cafes extends StatelessWidget {
                     ),
                     InkWell(
                       onTap: () {
-                        Get.to(Citas());
+                        Get.to(Citas(nombre: nombre,));
                       },
                       child: Column(
                         children: [
@@ -124,7 +126,9 @@ class Cafes extends StatelessWidget {
                 color: Colors.grey,
               ),
               onPressed: () {
-                Get.to(Perfil(usuariosSerivices: usuarios,));
+                Get.to(Perfil(
+                  usuariosSerivices: usuarios,
+                ));
               },
             ),
             label: '',

@@ -2,7 +2,6 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:matchcoffeeapp/pages/intro.dart';
 import 'package:get/get.dart';
-import 'package:matchcoffeeapp/pages/perfil.dart';
 import 'package:matchcoffeeapp/provider/usuarios_provider.dart';
 import 'package:matchcoffeeapp/services/firestore_services.dart';
 import 'package:provider/provider.dart';

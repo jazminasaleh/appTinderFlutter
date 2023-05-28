@@ -3,6 +3,9 @@ import 'package:get/get.dart';
 import 'package:matchcoffeeapp/pages/actualizardatos.dart';
 import 'package:matchcoffeeapp/pages/perfil.dart';
 import 'package:matchcoffeeapp/services/firestore_services.dart';
+import 'package:provider/provider.dart';
+
+import '../provider/usuarios_provider.dart';
 
 class RatingScreen extends StatefulWidget {
   const RatingScreen({super.key});
@@ -13,7 +16,6 @@ class RatingScreen extends StatefulWidget {
 
 class _RatingScreenState extends State<RatingScreen> {
   final _focusNode = FocusNode();
-  UsuariosSerivices usuariosSerivices = new UsuariosSerivices();
   List<bool> isActive = [
     true,
     true,
@@ -25,6 +27,8 @@ class _RatingScreenState extends State<RatingScreen> {
   String text = '';
   @override
   Widget build(BuildContext context) {
+    final usuariosServices = Provider.of<UsuariosSerivices>(context);
+    final usuariosProvier = Provider.of<UsariosProvider>(context);
     const outlineBorder = OutlineInputBorder(
       borderSide: BorderSide(width: 2, color: Colors.grey),
       borderRadius: BorderRadius.all(
@@ -36,7 +40,7 @@ class _RatingScreenState extends State<RatingScreen> {
         child: Center(
           child: Padding(
             padding:
-            const EdgeInsets.symmetric(horizontal: 20).copyWith(top: 50),
+                const EdgeInsets.symmetric(horizontal: 20).copyWith(top: 50),
             child: ListView(
               children: [
                 const CircleAvatar(
@@ -190,9 +194,27 @@ class _RatingScreenState extends State<RatingScreen> {
                 const SizedBox(height: 35),
                 ElevatedButton(
                   onPressed: () {
+                    print('este es mi correo ${usuariosProvier.email}');
                     /*
                       AQUI TOMAN LOS DATOS DE LA PANTALLA CON EN ON PRESSED DEL BOTON
                     */
+                    for (var i = 0; i < usuariosServices.usuarios.length; i++) {
+                      if (usuariosServices.usuarios[i]['email'] ==
+                          usuariosProvier.email) {
+                        print(
+                            'este es mi id ${usuariosServices.usuarios[i]['uid']}');
+                        usuariosServices.updateUser(
+                            '${usuariosServices.usuarios[i]['uid']}',
+                            '${usuariosServices.usuarios[i]['date']}',
+                            '${usuariosServices.usuarios[i]['email']}',
+                            '${usuariosServices.usuarios[i]['foto']}',
+                            '${usuariosServices.usuarios[i]['genero']}',
+                            '${usuariosServices.usuarios[i]['nombre']}',
+                            '${usuariosServices.usuarios[i]['signo']}',
+                            rating,
+                            text);
+                      }
+                    }
                     showDialog(
                       context: context,
                       builder: (context) {
@@ -216,14 +238,14 @@ class _RatingScreenState extends State<RatingScreen> {
                   },
                   style: ButtonStyle(
                       minimumSize:
-                      MaterialStateProperty.all<Size>(const Size(250, 70)),
+                          MaterialStateProperty.all<Size>(const Size(250, 70)),
                       backgroundColor: MaterialStateProperty.all<Color>(
                         const Color(0xff5487a2),
                       ),
                       shape: MaterialStateProperty.all<RoundedRectangleBorder>(
                           RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(10),
-                          ))),
+                        borderRadius: BorderRadius.circular(10),
+                      ))),
                   child: const Text(
                     'Calificar experiencia',
                     style: TextStyle(
@@ -238,14 +260,34 @@ class _RatingScreenState extends State<RatingScreen> {
           ),
         ),
       ),
-       bottomNavigationBar: BottomNavigationBar(
-        type:BottomNavigationBarType.fixed,
+      bottomNavigationBar: BottomNavigationBar(
+        type: BottomNavigationBarType.fixed,
         selectedItemColor: Colors.red,
         items: [
-          BottomNavigationBarItem(icon: IconButton(icon: Icon(Icons.home_outlined, color: Colors.grey,), onPressed: () { Get.to(Perfil(usuariosSerivices: usuariosSerivices,));},),label:'',),
-          BottomNavigationBarItem(icon: IconButton(icon: Icon(Icons.person_outline), color: Colors.green, onPressed: () { Get.to(Actualizardatos()); },),label:''),
+          BottomNavigationBarItem(
+            icon: IconButton(
+              icon: Icon(
+                Icons.home_outlined,
+                color: Colors.grey,
+              ),
+              onPressed: () {
+                Get.to(Perfil(
+                  usuariosSerivices: usuariosServices,
+                ));
+              },
+            ),
+            label: '',
+          ),
+          BottomNavigationBarItem(
+              icon: IconButton(
+                icon: Icon(Icons.person_outline),
+                color: Colors.grey,
+                onPressed: () {
+                  Get.to(Actualizardatos());
+                },
+              ),
+              label: ''),
         ],
-
       ),
     );
   }

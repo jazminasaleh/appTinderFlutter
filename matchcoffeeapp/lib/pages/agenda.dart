@@ -57,7 +57,7 @@ class _AgendaState extends State<Agenda> {
           SizedBox(height: 10),
           GestureDetector(
             onTap: () {
-               fechaHoy ='${dateTime.year}/${dateTime.month}/${dateTime.day}';
+               fechaHoy = '${dateTime.day}/${dateTime.month}/${dateTime.year}';
                 showDatePicker(
                   context: context,
                   initialDate: DateTime.now(),
@@ -66,7 +66,7 @@ class _AgendaState extends State<Agenda> {
                   .then((value) {
                     setState(() {
                       dateTime = value!;
-                      fecha ='${dateTime.year}/${dateTime.month}/${dateTime.day}';
+                      fecha = '${dateTime.day}/${dateTime.month}/${dateTime.year}';
                     });
                   });
             },

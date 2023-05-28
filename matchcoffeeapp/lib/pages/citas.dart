@@ -8,11 +8,15 @@ import 'cafes.dart';
 import 'calificacion.dart';
 
 class Citas extends StatefulWidget {
+  String nombre;
+  Citas({required this.nombre});
   @override
-  State<Citas> createState() => _CitasState();
+  State<Citas> createState() => _CitasState(nombre: nombre);
 }
 
 class _CitasState extends State<Citas> {
+  String nombre;
+  _CitasState({required this.nombre});
   final Usuario usuario = Get.put(Usuario());
 
   final TextEditingController _timeController = TextEditingController();
@@ -50,7 +54,7 @@ class _CitasState extends State<Citas> {
                     ),
                     children: [
                       TextSpan(
-                        text: 'Vas a invitar a David Robledo \n',
+                        text: 'Vas a invitar a $nombre \n',
                         style: TextStyle(
                           fontWeight: FontWeight.bold,
                           color: Color(0xFF5387A2),
@@ -73,7 +77,7 @@ class _CitasState extends State<Citas> {
                       child: GestureDetector(
                         onTap: () {
                           fechaHoy =
-                              '${dateTime.year}/${dateTime.month}/${dateTime.day}';
+                               '${dateTime.day}/${dateTime.month}/${dateTime.year}';
                           showDatePicker(
                                   context: context,
                                   initialDate: DateTime.now(),
@@ -83,7 +87,7 @@ class _CitasState extends State<Citas> {
                             setState(() {
                               dateTime = value!;
                               fecha =
-                                  '${dateTime.year}/${dateTime.month}/${dateTime.day}';
+                                   '${dateTime.day}/${dateTime.month}/${dateTime.year}';
                             });
                           });
                         },
@@ -174,7 +178,9 @@ class _CitasState extends State<Citas> {
                         SizedBox(width: 8),
                         GestureDetector(
                           onTap: () {
-                            Get.to(Cafes());
+                            Get.to(Cafes(
+                              nombre: nombre,
+                            ));
                           },
                           child: Text(
                             'Seleccionar lugar',
@@ -268,7 +274,6 @@ class _CitasState extends State<Citas> {
       ),
       bottomNavigationBar: BottomNavigationBar(
         type: BottomNavigationBarType.fixed,
-        selectedItemColor: Colors.red,
         items: [
           BottomNavigationBarItem(
               icon: IconButton(
@@ -277,7 +282,9 @@ class _CitasState extends State<Citas> {
                   color: Colors.grey,
                 ),
                 onPressed: () {
-                  Get.to(Perfil(usuariosSerivices: usuariosServices,));
+                  Get.to(Perfil(
+                    usuariosSerivices: usuariosServices,
+                  ));
                 },
               ),
               label: ''),
