@@ -118,11 +118,10 @@ class _CardState extends State<_Card> {
               decoration: BoxDecoration(
                 color: Colors.black,
                 image: DecorationImage(
-                  image: NetworkImage(
-                      '${usuariosSerivices.usuarios[propierties.index]['foto']}'),
-                  fit: BoxFit.cover,
-                  opacity: 0.7
-                ),
+                    image: NetworkImage(
+                        '${usuariosSerivices.usuarios[propierties.index]['foto']}'),
+                    fit: BoxFit.cover,
+                    opacity: 0.7),
                 borderRadius: BorderRadius.circular(15),
                 boxShadow: [
                   BoxShadow(
@@ -166,7 +165,10 @@ class _CardState extends State<_Card> {
                   ),
                   GestureDetector(
                     onTap: () {
-                      Get.to(Citas(nombre: '${usuariosSerivices.usuarios[propierties.index]['nombre']}',));
+                      Get.to(Citas(
+                        nombre:
+                            '${usuariosSerivices.usuarios[propierties.index]['nombre']}',
+                      ));
                     },
                     child: Row(
                         mainAxisAlignment: MainAxisAlignment.center,

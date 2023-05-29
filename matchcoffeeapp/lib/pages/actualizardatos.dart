@@ -10,6 +10,7 @@ import 'package:provider/provider.dart';
 
 import '../provider/usuarios_provider.dart';
 
+//*Muestra la informacion del uusario como el nombre, fecha de nacimeinto y se puede cambiar la foto
 class Actualizardatos extends StatefulWidget {
   @override
   State<Actualizardatos> createState() => _ActualizardatosState();
@@ -40,7 +41,11 @@ class _ActualizardatosState extends State<Actualizardatos> {
 
   @override
   Widget build(BuildContext context) {
-    String nomUusraio = '', fechaNacieminto = '', foto = '';
+    String nomUusraio = '',
+        fechaNacieminto = '',
+        foto = '',
+        signo = '',
+        genero = '';
     final usuariosProvier = Provider.of<UsariosProvider>(context);
     final usuariosServices = Provider.of<UsuariosSerivices>(context);
     for (var i = 0; i < usuariosServices.usuarios.length; i++) {
@@ -48,6 +53,8 @@ class _ActualizardatosState extends State<Actualizardatos> {
         nomUusraio = '${usuariosServices.usuarios[i]['nombre']}';
         fechaNacieminto = '${usuariosServices.usuarios[i]['date']}';
         foto = '${usuariosServices.usuarios[i]['foto']}';
+        signo = '${usuariosServices.usuarios[i]['signo']}';
+        genero = '${usuariosServices.usuarios[i]['genero']}';
       }
     }
     return Scaffold(
@@ -66,10 +73,9 @@ class _ActualizardatosState extends State<Actualizardatos> {
                           height: 170,
                           width: 170,
                           decoration: BoxDecoration(
-                              color: const Color.fromARGB(255, 199, 198, 198),
                               borderRadius: BorderRadius.circular(20)),
                           child: CircleAvatar(
-                            backgroundColor: Color.fromARGB(255, 199, 198, 198),
+                            backgroundColor: Colors.white,
                             child: imagen == null
                                 ? ClipRRect(
                                     borderRadius: BorderRadius.circular(20),
@@ -102,7 +108,7 @@ class _ActualizardatosState extends State<Actualizardatos> {
                   Row(
                     children: [
                       const Text(
-                        'usuario',
+                        'Usuario',
                         style: TextStyle(color: Colors.grey),
                       ),
                       const Spacer(),
@@ -118,7 +124,7 @@ class _ActualizardatosState extends State<Actualizardatos> {
                   Row(
                     children: [
                       const Text(
-                        'email',
+                        'Correo',
                         style: TextStyle(color: Colors.grey),
                       ),
                       const Spacer(),
@@ -144,8 +150,40 @@ class _ActualizardatosState extends State<Actualizardatos> {
                       )
                     ],
                   ),
+                  const SizedBox(
+                    height: 25,
+                  ),
+                  Row(
+                    children: [
+                      const Text(
+                        'Signo zodiacal',
+                        style: TextStyle(color: Colors.grey),
+                      ),
+                      const Spacer(),
+                      Text(
+                        '$signo',
+                        style: TextStyle(fontWeight: FontWeight.bold),
+                      )
+                    ],
+                  ),
+                  const SizedBox(
+                    height: 25,
+                  ),
+                  Row(
+                    children: [
+                      const Text(
+                        'Género',
+                        style: TextStyle(color: Colors.grey),
+                      ),
+                      const Spacer(),
+                      Text(
+                        '$genero',
+                        style: TextStyle(fontWeight: FontWeight.bold),
+                      )
+                    ],
+                  ),
                   SizedBox(
-                    height: MediaQuery.of(context).size.height * 0.10,
+                    height: MediaQuery.of(context).size.height * 0.05,
                   ),
                   Row(
                     children: [
@@ -159,7 +197,11 @@ class _ActualizardatosState extends State<Actualizardatos> {
                             size: 30,
                           )),
                       TextButton(
-                          onPressed: () => Get.to(Login()),
+                          onPressed: () {
+                           
+                            
+                            Get.to(Login());
+                          },
                           child: const Text(
                             'Cerrar sesion',
                             style: TextStyle(color: Colors.black, fontSize: 18),
@@ -189,11 +231,11 @@ class _ActualizardatosState extends State<Actualizardatos> {
                               if (usuariosServices.usuarios[i]['email'] ==
                                   usuariosProvier.email) {
                                 if (newPictureFile != null) {
-                                  
                                   final String? imageUrl =
                                       await usuariosServices
                                           .uploadImage(newPictureFile!);
-                                  usuariosServices.usuarios[i]['foto'] = imageUrl;
+                                  usuariosServices.usuarios[i]['foto'] =
+                                      imageUrl;
                                   usuariosProvier.foto = imageUrl!;
                                   usuariosServices.updateUser(
                                       '${usuariosServices.usuarios[i]['uid']}',

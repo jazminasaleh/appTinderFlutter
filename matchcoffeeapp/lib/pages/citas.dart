@@ -77,17 +77,28 @@ class _CitasState extends State<Citas> {
                       child: GestureDetector(
                         onTap: () {
                           fechaHoy =
-                               '${dateTime.day}/${dateTime.month}/${dateTime.year}';
+                              '${dateTime.day}/${dateTime.month}/${dateTime.year}';
                           showDatePicker(
-                                  context: context,
-                                  initialDate: DateTime.now(),
-                                  firstDate: DateTime(1900),
-                                  lastDate: DateTime(2025))
-                              .then((value) {
+                            context: context,
+                            initialDate: DateTime.now(),
+                            firstDate: DateTime(1900),
+                            lastDate: DateTime(2025),
+                            builder: (BuildContext context, Widget? child) {
+                              return Theme(
+                                data: ThemeData.light().copyWith(
+                                  colorScheme: ColorScheme.light().copyWith(
+                                    primary: Color(
+                                        0xFF5387A2), // Usa el color seleccionado aquí
+                                  ),
+                                ),
+                                child: child!,
+                              );
+                            },
+                          ).then((value) {
                             setState(() {
                               dateTime = value!;
                               fecha =
-                                   '${dateTime.day}/${dateTime.month}/${dateTime.year}';
+                                  '${dateTime.day}/${dateTime.month}/${dateTime.year}';
                             });
                           });
                         },
@@ -122,6 +133,17 @@ class _CitasState extends State<Citas> {
                         readOnly: true,
                         onTap: () {
                           showTimePicker(
+                            builder: (BuildContext context, Widget? child) {
+                              return Theme(
+                                data: ThemeData.light().copyWith(
+                                  colorScheme: ColorScheme.light().copyWith(
+                                    primary: Color(
+                                        0xFF5387A2), // Usa el color seleccionado aquí
+                                  ),
+                                ),
+                                child: child!,
+                              );
+                            },
                             context: context,
                             initialTime: TimeOfDay.now(),
                           ).then((pickedTime) {
@@ -136,7 +158,8 @@ class _CitasState extends State<Citas> {
                             borderRadius: BorderRadius.circular(18),
                           ),
                           enabledBorder: OutlineInputBorder(
-                            borderSide: const BorderSide(color: Color(0xFF5387A2)),
+                            borderSide:
+                                const BorderSide(color: Color(0xFF5387A2)),
                             borderRadius: BorderRadius.circular(18),
                           ),
                           prefixIcon: const Icon(Icons.access_time),
@@ -255,7 +278,73 @@ class _CitasState extends State<Citas> {
                     ),
                     onPressed: () {
                       print('Botón Continuar presionado funca');
-                      Get.to(const RatingScreen());
+                      DateTime dateHoy = DateTime.now();
+                      if (dateTime.year >= dateHoy.year) {
+                        if (dateTime.month >= dateHoy.month) {
+                          if (dateTime.month == dateHoy.month) {
+                            if (dateTime.day >= dateHoy.day) {
+                               Get.to(const RatingScreen());
+                            }else{
+                              ScaffoldMessenger.of(context)
+                                .showSnackBar(const SnackBar(
+                              content: Row(
+                                children: [
+                                  Icon(
+                                    Icons.date_range_outlined,
+                                    color: Colors.white,
+                                  ),
+                                  SizedBox(
+                                    width: 2,
+                                  ),
+                                  Text('Debe ser un día después de la fecha actual',
+                                      style: TextStyle(color: Color(0xFF5387A2))),
+                                ],
+                              ),
+                              duration: Duration(seconds: 3),
+                            ));
+                            }
+                          } else {
+                             Get.to(const RatingScreen());
+                          }
+                        }else{
+                          ScaffoldMessenger.of(context)
+                                .showSnackBar(const SnackBar(
+                              content: Row(
+                                children: [
+                                  Icon(
+                                    Icons.date_range_outlined,
+                                    color: Colors.white,
+                                  ),
+                                  SizedBox(
+                                    width: 2,
+                                  ),
+                                  Text('Debe ser un mes después la fecha actual',
+                                      style: TextStyle(color: Color(0xFF5387A2))),
+                                ],
+                              ),
+                              duration: Duration(seconds: 3),
+                            ));
+                        }
+                      }else{
+                        ScaffoldMessenger.of(context)
+                                .showSnackBar(const SnackBar(
+                              content: Row(
+                                children: [
+                                  Icon(
+                                    Icons.date_range_outlined,
+                                    color: Colors.white,
+                                  ),
+                                  SizedBox(
+                                    width: 2,
+                                  ),
+                                  Text('Debe ser el año actual o año mayor',
+                                      style: TextStyle(color: Color(0xFF5387A2))),
+                                ],
+                              ),
+                              duration: Duration(seconds: 3),
+                            ));
+                      }
+                     
                     },
                     child: const Text(
                       'Invitar',

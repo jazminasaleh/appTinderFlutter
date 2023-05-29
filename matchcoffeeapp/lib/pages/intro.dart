@@ -5,9 +5,11 @@ import 'package:matchcoffeeapp/services/firestore_services.dart';
 
 class Intro extends StatelessWidget {
   UsuariosSerivices usuariosServices = new UsuariosSerivices();
+  final GlobalKey<ScaffoldState> scaffoldKey = GlobalKey<ScaffoldState>();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+       key: scaffoldKey,
       backgroundColor: const Color(0xFFFDF4F5),
       body: Padding(
         padding: const EdgeInsets.all(10.0),

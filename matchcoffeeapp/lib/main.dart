@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:matchcoffeeapp/pages/intro.dart';
 import 'package:get/get.dart';
 import 'package:matchcoffeeapp/provider/usuarios_provider.dart';
+import 'package:matchcoffeeapp/services/auth_service.dart';
 import 'package:matchcoffeeapp/services/firestore_services.dart';
 import 'package:provider/provider.dart';
 
@@ -23,6 +24,7 @@ class Estados extends StatelessWidget {
       providers: [
         ChangeNotifierProvider(create: (_) => UsariosProvider()),
         ChangeNotifierProvider(create: (_) => UsuariosSerivices()),
+        ChangeNotifierProvider(create: (_) => AuthService()),
       ],
       child: MyApp(),
     );
