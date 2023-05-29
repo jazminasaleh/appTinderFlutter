@@ -33,7 +33,7 @@ class Perfil extends StatelessWidget {
         items: [
           BottomNavigationBarItem(
               icon: IconButton(
-                icon: Icon(
+                icon: const Icon(
                   Icons.home_outlined,
                   color: Colors.red,
                 ),
@@ -42,7 +42,7 @@ class Perfil extends StatelessWidget {
               label: ''),
           BottomNavigationBarItem(
               icon: IconButton(
-                icon: Icon(
+                icon: const Icon(
                   Icons.person_outline,
                   color: Colors.grey,
                 ),
@@ -73,7 +73,7 @@ class CustomCard extends StatelessWidget {
           _Card(
             usuariosSerivices: usuariosSerivices,
           ),
-          Positioned(
+          const Positioned(
             bottom: 0,
             child: Row(
               children: [],
@@ -112,15 +112,16 @@ class _CardState extends State<_Card> {
             ///*controller.rewind();
             return Container(
               alignment: Alignment.bottomLeft,
-              padding: EdgeInsets.all(10),
+              padding: const EdgeInsets.all(10),
               width: MediaQuery.of(context).size.width * 0.90,
               height: MediaQuery.of(context).size.height * 0.70,
               decoration: BoxDecoration(
-                color: Colors.amber,
+                color: Colors.black,
                 image: DecorationImage(
                   image: NetworkImage(
                       '${usuariosSerivices.usuarios[propierties.index]['foto']}'),
                   fit: BoxFit.cover,
+                  opacity: 0.7
                 ),
                 borderRadius: BorderRadius.circular(15),
                 boxShadow: [
@@ -137,7 +138,7 @@ class _CardState extends State<_Card> {
                 children: [
                   Text(
                     '${usuariosSerivices.usuarios[propierties.index]['nombre']}',
-                    style: TextStyle(
+                    style: const TextStyle(
                         color: Colors.white,
                         fontSize: 25,
                         fontWeight: FontWeight.bold),
@@ -154,7 +155,7 @@ class _CardState extends State<_Card> {
                     ),
                     child: Text(
                       '${usuariosSerivices.usuarios[propierties.index]['signo']}',
-                      style: TextStyle(
+                      style: const TextStyle(
                         fontSize: 18,
                         fontWeight: FontWeight.bold,
                       ),

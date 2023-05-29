@@ -32,35 +32,35 @@ class _CitasState extends State<Citas> {
     return Scaffold(
       backgroundColor: Colors.white,
       body: Padding(
-        padding: EdgeInsets.all(20),
+        padding: const EdgeInsets.all(20),
         child: Container(
           child: SingleChildScrollView(
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                Align(
+                const Align(
                   alignment: Alignment.center,
                   child: Image(
                     image: AssetImage('assets/images/calendario.png'),
                     width: 140,
                   ),
                 ),
-                SizedBox(height: 40),
+                const SizedBox(height: 40),
                 RichText(
                   textAlign: TextAlign.center,
                   text: TextSpan(
-                    style: TextStyle(
+                    style: const TextStyle(
                       fontSize: 20,
                     ),
                     children: [
                       TextSpan(
                         text: 'Vas a invitar a $nombre \n',
-                        style: TextStyle(
+                        style: const TextStyle(
                           fontWeight: FontWeight.bold,
                           color: Color(0xFF5387A2),
                         ),
                       ),
-                      TextSpan(
+                      const TextSpan(
                         text: 'a vivir la experiencia Match Coffee',
                         style: TextStyle(
                           fontWeight: FontWeight.bold,
@@ -70,7 +70,7 @@ class _CitasState extends State<Citas> {
                     ],
                   ),
                 ),
-                SizedBox(height: 40),
+                const SizedBox(height: 40),
                 Row(
                   children: [
                     Expanded(
@@ -96,15 +96,15 @@ class _CitasState extends State<Citas> {
                             border: Border.all(color: Color(0xFF5387A2)),
                             borderRadius: BorderRadius.circular(18),
                           ),
-                          padding: EdgeInsets.symmetric(
+                          padding: const EdgeInsets.symmetric(
                               vertical: 25, horizontal: 20),
                           child: Row(
                             children: [
-                              Icon(Icons.calendar_today),
-                              SizedBox(width: 20),
+                              const Icon(Icons.calendar_today),
+                              const SizedBox(width: 20),
                               Text(
                                 fecha == fechaHoy ? 'Fecha' : fecha,
-                                style: TextStyle(
+                                style: const TextStyle(
                                   color: Colors.grey,
                                   fontWeight: FontWeight.bold,
                                 ),
@@ -114,7 +114,7 @@ class _CitasState extends State<Citas> {
                         ),
                       ),
                     ),
-                    SizedBox(width: 20),
+                    const SizedBox(width: 20),
                     // Espacio entre los campos de fecha y hora
                     Expanded(
                       child: TextFormField(
@@ -136,18 +136,18 @@ class _CitasState extends State<Citas> {
                             borderRadius: BorderRadius.circular(18),
                           ),
                           enabledBorder: OutlineInputBorder(
-                            borderSide: BorderSide(color: Color(0xFF5387A2)),
+                            borderSide: const BorderSide(color: Color(0xFF5387A2)),
                             borderRadius: BorderRadius.circular(18),
                           ),
-                          prefixIcon: Icon(Icons.access_time),
-                          contentPadding: EdgeInsets.symmetric(
+                          prefixIcon: const Icon(Icons.access_time),
+                          contentPadding: const EdgeInsets.symmetric(
                               vertical: 30), // Aumenta el alto del campo
                         ),
                       ),
                     ),
                   ],
                 ),
-                SizedBox(height: 40),
+                const SizedBox(height: 40),
                 SizedBox(
                   width: double.infinity,
                   child: ElevatedButton(
@@ -156,10 +156,10 @@ class _CitasState extends State<Citas> {
                           Colors.white, // Cambiar el color de fondo a blanco
                       onPrimary: Color(
                           0xFF5387A2), // Cambiar el color del texto e icono a 0xFF5387A2
-                      padding: EdgeInsets.symmetric(vertical: 26),
+                      padding: const EdgeInsets.symmetric(vertical: 26),
                       shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(16),
-                        side: BorderSide(
+                        side: const BorderSide(
                             color: Color(
                                 0xFF5387A2)), // Agregar un borde de color 0xFF5387A2
                       ),
@@ -170,19 +170,19 @@ class _CitasState extends State<Citas> {
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
-                        Icon(
+                        const Icon(
                           Icons.location_on,
                           color: Color(0xFF5387A2),
                           size: 18,
                         ),
-                        SizedBox(width: 8),
+                        const SizedBox(width: 8),
                         GestureDetector(
                           onTap: () {
                             Get.to(Cafes(
                               nombre: nombre,
                             ));
                           },
-                          child: Text(
+                          child: const Text(
                             'Seleccionar lugar',
                             style: TextStyle(
                               fontFamily: 'Proxima Nova',
@@ -195,7 +195,7 @@ class _CitasState extends State<Citas> {
                     ),
                   ),
                 ),
-                SizedBox(height: 40),
+                const SizedBox(height: 40),
 
                 /* TextFormField(
                   controller: _textInputController,
@@ -212,7 +212,7 @@ class _CitasState extends State<Citas> {
                     contentPadding: EdgeInsets.symmetric(vertical: 30),
                   ),
                 ),*/
-                SizedBox(height: 20),
+                const SizedBox(height: 20),
                 SizedBox(
                   height: 150,
                   child: Container(
@@ -221,7 +221,7 @@ class _CitasState extends State<Citas> {
                       border: Border.all(color: Color(0xFF5387A2)),
                       borderRadius: BorderRadius.circular(18),
                     ),
-                    child: Center(
+                    child: const Center(
                       child: Padding(
                         padding: EdgeInsets.symmetric(horizontal: 16),
                         child: TextField(
@@ -242,7 +242,7 @@ class _CitasState extends State<Citas> {
                     ),
                   ),
                 ),
-                SizedBox(height: 40),
+                const SizedBox(height: 40),
                 SizedBox(
                   width: double.infinity,
                   child: ElevatedButton(
@@ -255,9 +255,9 @@ class _CitasState extends State<Citas> {
                     ),
                     onPressed: () {
                       print('Botón Continuar presionado funca');
-                      Get.to(RatingScreen());
+                      Get.to(const RatingScreen());
                     },
-                    child: Text(
+                    child: const Text(
                       'Invitar',
                       style: TextStyle(
                         fontFamily: 'Proxima Nova',
@@ -277,7 +277,7 @@ class _CitasState extends State<Citas> {
         items: [
           BottomNavigationBarItem(
               icon: IconButton(
-                icon: Icon(
+                icon: const Icon(
                   Icons.home_outlined,
                   color: Colors.grey,
                 ),
@@ -290,7 +290,7 @@ class _CitasState extends State<Citas> {
               label: ''),
           BottomNavigationBarItem(
               icon: IconButton(
-                icon: Icon(
+                icon: const Icon(
                   Icons.person_outline,
                   color: Colors.grey,
                 ),

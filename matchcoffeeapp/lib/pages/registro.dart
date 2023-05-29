@@ -15,7 +15,7 @@ class Registro extends StatelessWidget {
     return Scaffold(
       backgroundColor: Colors.white, // agregar esta línea
       body: Padding(
-        padding: EdgeInsets.all(20),
+        padding: const EdgeInsets.all(20),
         child: Container(
           child: SingleChildScrollView(
             child: Form(
@@ -23,15 +23,15 @@ class Registro extends StatelessWidget {
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  Align(
+                  const Align(
                     alignment: Alignment.center,
                     child: Image(
                       image: AssetImage('assets/images/logo.png'),
                       width: 140,
                     ),
                   ),
-                  SizedBox(height: 40),
-                  Align(
+                  const SizedBox(height: 40),
+                  const Align(
                     alignment: Alignment.centerLeft,
                     child: Text(
                       'Registrate',
@@ -41,7 +41,7 @@ class Registro extends StatelessWidget {
                       ),
                     ),
                   ),
-                  SizedBox(height: 20),
+                  const SizedBox(height: 20),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     crossAxisAlignment: CrossAxisAlignment.center,
@@ -61,10 +61,10 @@ class Registro extends StatelessWidget {
                             ),
                           ),
                           style: ElevatedButton.styleFrom(
-                            padding: EdgeInsets.symmetric(vertical: 30),
+                            padding: const EdgeInsets.symmetric(vertical: 30),
                             backgroundColor: Colors
                                 .white, // Cambiar el color de fondo a blanco
-                            shape: RoundedRectangleBorder(
+                            shape: const RoundedRectangleBorder(
                               borderRadius: BorderRadius.only(
                                 topLeft: Radius.circular(18),
                                 topRight: Radius.circular(0),
@@ -75,8 +75,6 @@ class Registro extends StatelessWidget {
                           ),
                         ),
                       ),
-                      SizedBox(
-                          width: 0), //eliminar el espacio entre los botones
                       Expanded(
                         child: ElevatedButton(
                           onPressed: () {
@@ -92,10 +90,10 @@ class Registro extends StatelessWidget {
                             ),
                           ),
                           style: ElevatedButton.styleFrom(
-                            padding: EdgeInsets.symmetric(vertical: 30),
+                            padding: const EdgeInsets.symmetric(vertical: 30),
                             backgroundColor: Colors
                                 .white, // Cambiar el color de fondo a blanco
-                            shape: RoundedRectangleBorder(
+                            shape: const RoundedRectangleBorder(
                               borderRadius: BorderRadius.only(
                                 topLeft: Radius.circular(0),
                                 topRight: Radius.circular(18),
@@ -108,29 +106,29 @@ class Registro extends StatelessWidget {
                       ),
                     ],
                   ),
-                  SizedBox(height: 40),
+                  const SizedBox(height: 40),
                   TextFormField(
                       keyboardType: TextInputType.emailAddress,
                       decoration: InputDecoration(
                         labelText: 'Email',
-                        labelStyle: TextStyle(
+                        labelStyle: const TextStyle(
                           color: Colors.grey, // color del label
                           fontWeight: FontWeight.bold,
                         ),
                         border: OutlineInputBorder(
                           borderRadius: BorderRadius.circular(18),
-                          borderSide: BorderSide(color: Color(0xFFFCCED1)),
+                          borderSide: const BorderSide(color: Color(0xFFFCCED1)),
                         ),
                         focusedBorder: OutlineInputBorder(
                           borderRadius: BorderRadius.circular(18),
-                          borderSide: BorderSide(color: Color(0xFFE24E59)),
+                          borderSide: const BorderSide(color: Color(0xFFE24E59)),
                         ),
                         enabledBorder: OutlineInputBorder(
                           borderRadius: BorderRadius.circular(18),
-                          borderSide: BorderSide(color: Color(0xFFFCCED1)),
+                          borderSide: const BorderSide(color: Color(0xFFFCCED1)),
                         ),
                         contentPadding:
-                            EdgeInsets.symmetric(vertical: 25, horizontal: 20),
+                            const EdgeInsets.symmetric(vertical: 25, horizontal: 20),
                       ),
                       onChanged: (value) => usuariosProvier.email = value,
                       validator: (value) {
@@ -141,29 +139,29 @@ class Registro extends StatelessWidget {
                             ? null
                             : 'El valor ingresado no se ve como un correo';
                       }),
-                  SizedBox(height: 40),
+                  const SizedBox(height: 40),
                   TextFormField(
                     obscureText: true,
                     decoration: InputDecoration(
                       labelText: 'Contraseña',
-                      labelStyle: TextStyle(
+                      labelStyle: const TextStyle(
                         color: Colors.grey, // color del label
                         fontWeight: FontWeight.bold,
                       ),
                       border: OutlineInputBorder(
                         borderRadius: BorderRadius.circular(18),
-                        borderSide: BorderSide(color: Color(0xFFFCCED1)),
+                        borderSide: const BorderSide(color: Color(0xFFFCCED1)),
                       ),
                       focusedBorder: OutlineInputBorder(
                         borderRadius: BorderRadius.circular(18),
-                        borderSide: BorderSide(color: Color(0xFFE24E59)),
+                        borderSide: const BorderSide(color: Color(0xFFE24E59)),
                       ),
                       enabledBorder: OutlineInputBorder(
                         borderRadius: BorderRadius.circular(18),
-                        borderSide: BorderSide(color: Color(0xFFFCCED1)),
+                        borderSide: const BorderSide(color: Color(0xFFFCCED1)),
                       ),
                       contentPadding:
-                          EdgeInsets.symmetric(vertical: 25, horizontal: 20),
+                          const EdgeInsets.symmetric(vertical: 25, horizontal: 20),
                     ),
                     onChanged: (value) => usuariosProvier.password = value,
                       validator: (value) {
@@ -174,13 +172,13 @@ class Registro extends StatelessWidget {
                           : 'El valor ingresado no se ve como una contraseña';
                       },
                   ),
-                  SizedBox(height: 40),
+                  const SizedBox(height: 40),
                   SizedBox(
                     width: double.infinity,
                     child: ElevatedButton(
                       style: ElevatedButton.styleFrom(
-                        primary: Color(0xFFE24E59), //color de fondo
-                        padding: EdgeInsets.symmetric(vertical: 26),
+                        primary:const Color(0xFFE24E59), //color de fondo
+                        padding: const EdgeInsets.symmetric(vertical: 26),
                         shape: RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(16),
                         ), //aumento del padding
@@ -189,7 +187,7 @@ class Registro extends StatelessWidget {
                         Get.to(Segundopasor());
                         print('Botón Continuar presionado');
                       },
-                      child: Text(
+                      child: const Text(
                         'Continuar',
                         style: TextStyle(
                           fontFamily: 'Proxima Nova',
@@ -199,13 +197,13 @@ class Registro extends StatelessWidget {
                       ),
                     ),
                   ),
-                  SizedBox(height: 30),
+                  const SizedBox(height: 30),
                   Center(
                     child: GestureDetector(
                       onTap: () {
                         Get.to(Login()); //navegar a la nueva página
                       },
-                      child: Text(
+                      child: const Text(
                         '¿Ya tienes cuenta? Iniciar sesión',
                         style: TextStyle(
                           fontSize: 16,

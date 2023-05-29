@@ -18,8 +18,9 @@ class Actualizardatos extends StatefulWidget {
 class _ActualizardatosState extends State<Actualizardatos> {
   File? imagen;
   final picker = ImagePicker();
+  File? newPictureFile;
 
-  Future selImagen(op) async {
+  Future selImagen(op, BuildContext context) async {
     var pickedFile;
     if (op == 1) {
       pickedFile = await picker.pickImage(source: ImageSource.camera);
@@ -29,6 +30,7 @@ class _ActualizardatosState extends State<Actualizardatos> {
     setState(() {
       if (pickedFile != null) {
         imagen = File(pickedFile.path);
+        newPictureFile = File.fromUri(Uri(path: pickedFile.path));
         print(' tenemos imagen $imagen');
       } else {
         print('No se selecciono ninguna imagen');
@@ -38,21 +40,22 @@ class _ActualizardatosState extends State<Actualizardatos> {
 
   @override
   Widget build(BuildContext context) {
-    String nomUusraio = '', fechaNacieminto = '';
+    String nomUusraio = '', fechaNacieminto = '', foto = '';
     final usuariosProvier = Provider.of<UsariosProvider>(context);
     final usuariosServices = Provider.of<UsuariosSerivices>(context);
     for (var i = 0; i < usuariosServices.usuarios.length; i++) {
       if (usuariosServices.usuarios[i]['email'] == usuariosProvier.email) {
         nomUusraio = '${usuariosServices.usuarios[i]['nombre']}';
         fechaNacieminto = '${usuariosServices.usuarios[i]['date']}';
+        foto = '${usuariosServices.usuarios[i]['foto']}';
       }
     }
     return Scaffold(
       body: Center(
         child: Padding(
-          padding: EdgeInsets.symmetric(horizontal: 50),
+          padding: const EdgeInsets.symmetric(horizontal: 50),
           child: Padding(
-            padding: EdgeInsets.only(top: 50),
+            padding: const EdgeInsets.only(top: 50),
             child: SingleChildScrollView(
               child: Column(
                 children: [
@@ -70,9 +73,7 @@ class _ActualizardatosState extends State<Actualizardatos> {
                             child: imagen == null
                                 ? ClipRRect(
                                     borderRadius: BorderRadius.circular(20),
-                                    child: Image.asset(
-                                      'assets/images/foto.jpg',
-                                    ),
+                                    child: Image.network(foto),
                                   )
                                 : ClipRRect(
                                     borderRadius: BorderRadius.circular(20),
@@ -85,7 +86,7 @@ class _ActualizardatosState extends State<Actualizardatos> {
                         child: CircleAvatar(
                           backgroundColor: Colors.black,
                           child: IconButton(
-                            icon: Icon(Icons.edit),
+                            icon: const Icon(Icons.edit),
                             color: Colors.red,
                             onPressed: () {
                               opciones(context);
@@ -95,48 +96,48 @@ class _ActualizardatosState extends State<Actualizardatos> {
                       )
                     ],
                   ),
-                  SizedBox(
+                  const SizedBox(
                     height: 45,
                   ),
                   Row(
                     children: [
-                      Text(
+                      const Text(
                         'usuario',
                         style: TextStyle(color: Colors.grey),
                       ),
-                      Spacer(),
+                      const Spacer(),
                       Text(
                         '$nomUusraio',
                         style: TextStyle(fontWeight: FontWeight.bold),
                       )
                     ],
                   ),
-                  SizedBox(
+                  const SizedBox(
                     height: 25,
                   ),
                   Row(
                     children: [
-                      Text(
+                      const Text(
                         'email',
                         style: TextStyle(color: Colors.grey),
                       ),
-                      Spacer(),
+                      const Spacer(),
                       Text(
                         '${usuariosProvier.email}',
                         style: TextStyle(fontWeight: FontWeight.bold),
                       )
                     ],
                   ),
-                  SizedBox(
+                  const SizedBox(
                     height: 25,
                   ),
                   Row(
                     children: [
-                      Text(
+                      const Text(
                         'Fecha de Nacimiento',
                         style: TextStyle(color: Colors.grey),
                       ),
-                      Spacer(),
+                      const Spacer(),
                       Text(
                         '$fechaNacieminto',
                         style: TextStyle(fontWeight: FontWeight.bold),
@@ -152,17 +153,74 @@ class _ActualizardatosState extends State<Actualizardatos> {
                           onPressed: () {
                             Get.to(Login());
                           },
-                          icon: Icon(
+                          icon: const Icon(
                             Icons.logout_outlined,
                             color: Colors.red,
                             size: 30,
                           )),
                       TextButton(
                           onPressed: () => Get.to(Login()),
-                          child: Text(
+                          child: const Text(
                             'Cerrar sesion',
                             style: TextStyle(color: Colors.black, fontSize: 18),
                           ))
+                    ],
+                  ),
+                  SizedBox(
+                    height: MediaQuery.of(context).size.height * 0.10,
+                  ),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      SizedBox(
+                        width: MediaQuery.of(context).size.width * 0.70,
+                        child: ElevatedButton(
+                          style: ElevatedButton.styleFrom(
+                            primary: const Color(0xFFE24E59), //color de fondo
+                            padding: const EdgeInsets.symmetric(vertical: 26),
+                            shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(16),
+                            ), //aumento del padding
+                          ),
+                          onPressed: () async {
+                            for (var i = 0;
+                                i < usuariosServices.usuarios.length;
+                                i++) {
+                              if (usuariosServices.usuarios[i]['email'] ==
+                                  usuariosProvier.email) {
+                                if (newPictureFile != null) {
+                                  
+                                  final String? imageUrl =
+                                      await usuariosServices
+                                          .uploadImage(newPictureFile!);
+                                  usuariosServices.usuarios[i]['foto'] = imageUrl;
+                                  usuariosProvier.foto = imageUrl!;
+                                  usuariosServices.updateUser(
+                                      '${usuariosServices.usuarios[i]['uid']}',
+                                      '${usuariosServices.usuarios[i]['date']}',
+                                      '${usuariosServices.usuarios[i]['email']}',
+                                      imageUrl,
+                                      '${usuariosServices.usuarios[i]['genero']}',
+                                      '${usuariosServices.usuarios[i]['nombre']}',
+                                      '${usuariosServices.usuarios[i]['signo']}',
+                                      usuariosServices.usuarios[i]
+                                          ['calificacion'],
+                                      '${usuariosServices.usuarios[i]['opinion']}');
+                                }
+                              }
+                            }
+                            Get.to(Perfil(usuariosSerivices: usuariosServices));
+                          },
+                          child: const Text(
+                            'Actualizar IMG',
+                            style: TextStyle(
+                              fontFamily: 'Proxima Nova',
+                              fontWeight: FontWeight.bold,
+                              fontSize: 18,
+                            ),
+                          ),
+                        ),
+                      ),
                     ],
                   )
                 ],
@@ -177,7 +235,7 @@ class _ActualizardatosState extends State<Actualizardatos> {
         items: [
           BottomNavigationBarItem(
             icon: IconButton(
-              icon: Icon(
+              icon: const Icon(
                 Icons.home_outlined,
                 color: Colors.grey,
               ),
@@ -189,7 +247,7 @@ class _ActualizardatosState extends State<Actualizardatos> {
             ),
             label: '',
           ),
-          BottomNavigationBarItem(
+          const BottomNavigationBarItem(
               icon: Icon(
                 Icons.person_outline,
                 color: Colors.red,
@@ -200,6 +258,20 @@ class _ActualizardatosState extends State<Actualizardatos> {
     );
   }
 
+/*
+ if(newPictureFile != null){
+             final String? imageUrl = await usuariosServices.uploadImage(newPictureFile!);
+               usuariosProvier.foto = imageUrl!;
+                              usuariosServices.addUser(
+                                usuariosProvier.date,
+                                usuariosProvier.email,
+                                imageUrl,
+                                usuariosProvier.gender,
+                                usuariosProvier.name,
+                                usuariosProvier.zodiacSign
+                              );
+        }
+*/
   void opciones(BuildContext context) {
     showDialog(
         context: context,
@@ -211,7 +283,7 @@ class _ActualizardatosState extends State<Actualizardatos> {
                 children: [
                   InkWell(
                     onTap: () {
-                      selImagen(1);
+                      selImagen(1, context);
                     },
                     child: Container(
                       padding: const EdgeInsets.all(20),
@@ -238,7 +310,7 @@ class _ActualizardatosState extends State<Actualizardatos> {
                   ),
                   InkWell(
                     onTap: () {
-                      selImagen(2);
+                      selImagen(2, context);
                     },
                     child: Container(
                       padding: const EdgeInsets.all(20),

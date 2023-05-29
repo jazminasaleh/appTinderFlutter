@@ -7,11 +7,10 @@ class Intro extends StatelessWidget {
   UsuariosSerivices usuariosServices = new UsuariosSerivices();
   @override
   Widget build(BuildContext context) {
-    print('dos ${usuariosServices.usuarios}');
     return Scaffold(
-      backgroundColor: Color(0xFFFDF4F5),
+      backgroundColor: const Color(0xFFFDF4F5),
       body: Padding(
-        padding: EdgeInsets.all(10.0),
+        padding: const EdgeInsets.all(10.0),
         child: SingleChildScrollView(
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
@@ -23,18 +22,18 @@ class Intro extends StatelessWidget {
                   width: MediaQuery.of(context).size.width * 0.4,
                 ),
               ),
-              SizedBox(
+              const SizedBox(
                   height:
                       20), // Agrega un espacio de 20px entre la imagen y el texto
-              Text(
+              const Text(
                 '¡Bienvenido a Match Coffee!',
                 textAlign: TextAlign.center, // Centra horizontalmente el texto
                 style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
               ),
-              SizedBox(
+              const SizedBox(
                   height:
                       10), // Agrega un espacio de 10px entre el texto y el resto de los elementos
-              Text(
+              const Text(
                 'Un espacio para amantes del café y las buenas conversaciones',
                 textAlign: TextAlign.center, // Centra horizontalmente el texto
               ),
@@ -43,17 +42,10 @@ class Intro extends StatelessWidget {
                       0.20), // Agrega un espacio de 20px entre el texto y el botón
               ElevatedButton(
                 onPressed: () {
-                 
-                  print('mi lista a ${usuariosServices.usuarios[0]['nombre']}');
-
-                  print('lista de mis usuarios ${usuariosServices.usuarios}');
-                  for (var i = 0; i < usuariosServices.usuarios.length; i++) {
-                    print('${usuariosServices.usuarios[i]}');
-                  }
                   Get.to(Login());
                 },
                 style: ElevatedButton.styleFrom(
-                  primary: Color(0xFFE24E59),
+                  primary: const Color(0xFFE24E59),
                   minimumSize: Size(300, 50),
                   padding: EdgeInsets.symmetric(vertical: 26),
                   shape: RoundedRectangleBorder(
@@ -61,7 +53,7 @@ class Intro extends StatelessWidget {
                         16), // Cambia el valor de 20 según el radio que desees
                   ),
                 ),
-                child: Text('Seguir'),
+                child: const Text('Seguir'),
               ),
             ],
           ),

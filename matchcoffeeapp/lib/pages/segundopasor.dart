@@ -1,9 +1,11 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:matchcoffeeapp/services/firestore_services.dart';
 import 'package:provider/provider.dart';
 import '../controladores/usuario.dart';
-import 'package:file_picker/file_picker.dart';
+import 'package:image_picker/image_picker.dart';
 import '../provider/usuarios_provider.dart';
 import 'login.dart';
 
@@ -19,15 +21,18 @@ class _SegundopasorState extends State<Segundopasor> {
   String fechaHoy = '';
   String genero = 'mujer', signoZodiacal = '';
   bool generoF = true, generoM = false;
+  File? imagen;
+  final picker = new ImagePicker();
+  File? newPictureFile;
+  bool imagenSeleccionada = true;
   @override
   Widget build(BuildContext context) {
     final usuariosProvier = Provider.of<UsariosProvider>(context);
     final usuariosServices = Provider.of<UsuariosSerivices>(context);
-    print(' fecha mia ${usuariosProvier.email}');
     return Scaffold(
       backgroundColor: Colors.white, // agregar esta línea
       body: Padding(
-        padding: EdgeInsets.all(20),
+        padding: const EdgeInsets.all(20),
         child: Container(
           child: SingleChildScrollView(
             child: Form(
@@ -35,7 +40,7 @@ class _SegundopasorState extends State<Segundopasor> {
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  Align(
+                  const Align(
                     alignment: Alignment.center,
                     child: Image(
                       image: AssetImage('assets/images/logo.png'),
@@ -47,7 +52,7 @@ class _SegundopasorState extends State<Segundopasor> {
                     keyboardType: TextInputType.text,
                     decoration: InputDecoration(
                       labelText: 'Nombre',
-                      labelStyle: TextStyle(
+                      labelStyle: const TextStyle(
                         color: Colors.grey, // color del label
                         fontWeight: FontWeight.bold,
                       ),
@@ -73,7 +78,7 @@ class _SegundopasorState extends State<Segundopasor> {
                           : 'El valor ingresado no se ve como un nombre';
                     },
                   ),
-                  SizedBox(height: 40),
+                  const SizedBox(height: 40),
                   GestureDetector(
                     onTap: () {
                       fechaHoy =
@@ -87,7 +92,7 @@ class _SegundopasorState extends State<Segundopasor> {
                         setState(() {
                           dateTime = value!;
                           fecha =
-                            '${dateTime.day}/${dateTime.month}/${dateTime.year}';
+                              '${dateTime.day}/${dateTime.month}/${dateTime.year}';
                           usuariosProvier.date = fecha;
                         });
                       });
@@ -98,14 +103,14 @@ class _SegundopasorState extends State<Segundopasor> {
                         borderRadius: BorderRadius.circular(18),
                       ),
                       padding:
-                          EdgeInsets.symmetric(vertical: 25, horizontal: 20),
+                          const EdgeInsets.symmetric(vertical: 25, horizontal: 20),
                       child: Row(
                         children: [
-                          Icon(Icons.calendar_today),
-                          SizedBox(width: 20),
+                          const Icon(Icons.calendar_today),
+                          const SizedBox(width: 20),
                           Text(
                             fecha == fechaHoy ? 'Fecha de nacimeinto' : fecha,
-                            style: TextStyle(
+                            style: const TextStyle(
                               color: Colors.grey,
                               fontWeight: FontWeight.bold,
                             ),
@@ -114,12 +119,12 @@ class _SegundopasorState extends State<Segundopasor> {
                       ),
                     ),
                   ),
-                  SizedBox(height: 40),
+                  const SizedBox(height: 40),
                   DropdownButtonFormField<String>(
                     value: 'Aries', // valor predeterminado
                     decoration: InputDecoration(
                       labelText: 'Signo Zodiacal',
-                      labelStyle: TextStyle(
+                      labelStyle: const TextStyle(
                         color: Colors.grey, // color del label
                         fontWeight: FontWeight.bold,
                       ),
@@ -160,7 +165,7 @@ class _SegundopasorState extends State<Segundopasor> {
                       signoZodiacal = value!;
                     },
                   ),
-                  SizedBox(height: 40),
+                  const SizedBox(height: 40),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     crossAxisAlignment: CrossAxisAlignment.center,
@@ -206,7 +211,7 @@ class _SegundopasorState extends State<Segundopasor> {
                           ),
                         ),
                       ),
-                      SizedBox(
+                      const SizedBox(
                           width: 20), //eliminar el espacio entre los botones
                       Expanded(
                         child: ElevatedButton(
@@ -231,7 +236,7 @@ class _SegundopasorState extends State<Segundopasor> {
                             ),
                           ),
                           style: ElevatedButton.styleFrom(
-                            padding: EdgeInsets.symmetric(vertical: 30),
+                            padding: const EdgeInsets.symmetric(vertical: 30),
                             backgroundColor:
                                 generoF ? Color(0xFFE24E59) : Colors.white,
                             shape: RoundedRectangleBorder(
@@ -239,7 +244,7 @@ class _SegundopasorState extends State<Segundopasor> {
                               side: BorderSide(
                                 color: generoF
                                     ? Colors.white
-                                    : Color(
+                                    : const Color(
                                         0xFFF1858D), // Agregar borde de color #F1858D
                                 width: 2, // Ancho del borde
                               ),
@@ -250,9 +255,28 @@ class _SegundopasorState extends State<Segundopasor> {
                       ),
                     ],
                   ),
-                  SizedBox(height: 40),
+                  const SizedBox(height: 40),
                   Container(
-                    margin: EdgeInsets.only(
+                    height: 150,
+                    width: 200,
+                    decoration: BoxDecoration(
+                        color: Colors.white,
+                        borderRadius: BorderRadius.circular(30)),
+                    child: imagen == null
+                        ? ClipRRect(
+                            borderRadius: BorderRadius.circular(10),
+                            child: Image.asset(
+                              'assets/images/foto.jpg',
+                            ),
+                          )
+                        : ClipRRect(
+                            borderRadius: BorderRadius.circular(10),
+                            child: Image.file(imagen!),
+                          ),
+                  ),
+                  const SizedBox(height: 20),
+                  Container(
+                    margin: const EdgeInsets.only(
                         bottom: 20.0), // Margen inferior de 20px
                     decoration: BoxDecoration(
                       border: Border.all(
@@ -262,22 +286,29 @@ class _SegundopasorState extends State<Segundopasor> {
                       borderRadius: BorderRadius.circular(8.0),
                     ),
                     child: Padding(
-                      padding: EdgeInsets.all(
+                      padding: const EdgeInsets.all(
                           10.0), // Padding de 20px en todos los lados
                       child: TextButton(
                         onPressed: () async {
                           print("prueba");
-                          final file = await FilePicker.platform
-                              .pickFiles(type: FileType.any);
-                          if (file != null) {
-                            print(file.files.single.name);
-                            final fileName = file.files.single.name;
-                            usuario.guardarfile.value = fileName;
-                            print(usuario.guardarfile);
-                            usuariosProvier.foto = fileName;
-                          }
+                          /*final file = await FilePicker.platform
+                              .pickFiles(type: FileType.any);*/
+                          final PickedFile? pickedFile = await picker.getImage(
+                              source: ImageSource.gallery, imageQuality: 100);
+                          setState(() {
+                            if (pickedFile != null) {
+                              imagenSeleccionada = true;
+                              imagen = File(pickedFile.path);
+                              newPictureFile =
+                                  File.fromUri(Uri(path: pickedFile.path));
+                              print('Esta es mi imagen $imagen');
+                            } else {
+                              imagenSeleccionada = false;
+                              print('No se selecciono ninguna imagen');
+                            }
+                          });
                         },
-                        child: Text(
+                        child: const Text(
                           'Seleccionar Foto de perfil',
                           style: TextStyle(
                             fontFamily: 'Proxima Nova',
@@ -289,9 +320,7 @@ class _SegundopasorState extends State<Segundopasor> {
                       ),
                     ),
                   ),
-                  Obx(() => Text(
-                      "Archivo seleccionado: ${usuario.guardarfile.value}")),
-                  SizedBox(height: 40),
+                  const SizedBox(height: 40),
                   SizedBox(
                     width: double.infinity,
                     child: ElevatedButton(
@@ -302,23 +331,32 @@ class _SegundopasorState extends State<Segundopasor> {
                           borderRadius: BorderRadius.circular(16),
                         ), //aumento del padding
                       ),
-                      onPressed: () {
+                      onPressed: () async {
                         //*Agregar la informacion tambien a la parte de iniciar sesion
                         if (signoZodiacal == '') {
                           usuariosProvier.zodiacSign = 'Aries';
                         } else {
                           usuariosProvier.zodiacSign = signoZodiacal;
                         }
-                        usuariosServices.addUser(
-                            usuariosProvier.date,
-                            usuariosProvier.email,
-                            'https://i.pinimg.com/736x/1f/b6/e5/1fb6e5f12b3b163463ee33fd7a3df4ad.jpg',
-                            genero,
-                            usuariosProvier.name,
-                            usuariosProvier.zodiacSign);
-                        Get.to(Login());
+                        
+                        if (newPictureFile != null) {
+                           final String? imageUrl = await usuariosServices
+                              .uploadImage(newPictureFile!);
+                              usuariosProvier.foto = imageUrl!;
+                              usuariosServices.addUser(
+                                usuariosProvier.date,
+                                usuariosProvier.email,
+                                imageUrl,
+                                genero,
+                                usuariosProvier.name,
+                                usuariosProvier.zodiacSign
+                              );
+                          Get.to(Login());
+                        } else {
+                         //*Alerta de que debe de salir la imagen 
+                        }
                       },
-                      child: Text(
+                      child: const Text(
                         'Regístrate',
                         style: TextStyle(
                           fontFamily: 'Proxima Nova',
@@ -328,7 +366,7 @@ class _SegundopasorState extends State<Segundopasor> {
                       ),
                     ),
                   ),
-                  SizedBox(height: 40),
+                  const SizedBox(height: 40),
                   Text(usuario.email.text),
                 ],
               ),

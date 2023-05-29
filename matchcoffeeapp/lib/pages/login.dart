@@ -14,30 +14,33 @@ class Login extends StatefulWidget {
 
 class _LoginState extends State<Login> {
   final Usuario usuario = Get.put(Usuario());
- UsuariosSerivices usuariosServices = new UsuariosSerivices();
+  UsuariosSerivices usuariosServices = new UsuariosSerivices();
+  final GlobalKey<ScaffoldState> scaffoldKey = GlobalKey<ScaffoldState>();
   @override
   Widget build(BuildContext context) {
     final usuariosProvier = Provider.of<UsariosProvider>(context);
     return Scaffold(
+      key: scaffoldKey,
       backgroundColor: Colors.white, // agregar esta línea
       body: Padding(
         padding: EdgeInsets.all(20),
         child: Container(
           child: SingleChildScrollView(
             child: Form(
+              //key: loginFormProvider.formKey,
               autovalidateMode: AutovalidateMode.onUserInteraction,
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  Align(
+                  const Align(
                     alignment: Alignment.center,
                     child: Image(
                       image: AssetImage('assets/images/logo.png'),
                       width: 140,
                     ),
                   ),
-                  SizedBox(height: 40),
-                  Align(
+                  const SizedBox(height: 40),
+                  const Align(
                     alignment: Alignment.centerLeft,
                     child: Text(
                       'Iniciar sesión',
@@ -47,7 +50,7 @@ class _LoginState extends State<Login> {
                       ),
                     ),
                   ),
-                  SizedBox(height: 20),
+                  const SizedBox(height: 20),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     crossAxisAlignment: CrossAxisAlignment.center,
@@ -67,10 +70,10 @@ class _LoginState extends State<Login> {
                             ),
                           ),
                           style: ElevatedButton.styleFrom(
-                            padding: EdgeInsets.symmetric(vertical: 30),
+                            padding: const EdgeInsets.symmetric(vertical: 30),
                             backgroundColor: Colors
                                 .white, // Cambiar el color de fondo a blanco
-                            shape: RoundedRectangleBorder(
+                            shape: const RoundedRectangleBorder(
                               borderRadius: BorderRadius.only(
                                 topLeft: Radius.circular(18),
                                 topRight: Radius.circular(0),
@@ -81,7 +84,7 @@ class _LoginState extends State<Login> {
                           ),
                         ),
                       ),
-                      SizedBox(
+                      const SizedBox(
                           width: 0), //eliminar el espacio entre los botones
                       Expanded(
                         child: ElevatedButton(
@@ -98,10 +101,10 @@ class _LoginState extends State<Login> {
                             ),
                           ),
                           style: ElevatedButton.styleFrom(
-                            padding: EdgeInsets.symmetric(vertical: 30),
+                            padding: const EdgeInsets.symmetric(vertical: 30),
                             backgroundColor: Colors
                                 .white, // Cambiar el color de fondo a blanco
-                            shape: RoundedRectangleBorder(
+                            shape: const RoundedRectangleBorder(
                               borderRadius: BorderRadius.only(
                                 topLeft: Radius.circular(0),
                                 topRight: Radius.circular(18),
@@ -123,24 +126,24 @@ class _LoginState extends State<Login> {
                       keyboardType: TextInputType.emailAddress,
                       decoration: InputDecoration(
                         labelText: 'Email',
-                        labelStyle: TextStyle(
+                        labelStyle: const TextStyle(
                           color: Colors.grey, // color del label
                           fontWeight: FontWeight.bold,
                         ),
                         border: OutlineInputBorder(
                           borderRadius: BorderRadius.circular(18),
-                          borderSide: BorderSide(color: Color(0xFFFCCED1)),
+                          borderSide: const BorderSide(color: Color(0xFFFCCED1)),
                         ),
                         focusedBorder: OutlineInputBorder(
                           borderRadius: BorderRadius.circular(18),
-                          borderSide: BorderSide(color: Color(0xFFE24E59)),
+                          borderSide: const BorderSide(color: Color(0xFFE24E59)),
                         ),
                         enabledBorder: OutlineInputBorder(
                           borderRadius: BorderRadius.circular(18),
-                          borderSide: BorderSide(color: Color(0xFFFCCED1)),
+                          borderSide: const BorderSide(color: Color(0xFFFCCED1)),
                         ),
                         contentPadding:
-                            EdgeInsets.symmetric(vertical: 25, horizontal: 20),
+                            const EdgeInsets.symmetric(vertical: 25, horizontal: 20),
                       ),
                       onChanged: (value) => usuariosProvier.email = value,
                       validator: (value) {
@@ -153,7 +156,7 @@ class _LoginState extends State<Login> {
                       },
                     ),
                   ),
-                  SizedBox(height: 40),
+                  const SizedBox(height: 40),
                   Container(
                     width: MediaQuery.of(context).size.width * 0.90,
                     child: TextFormField(
@@ -162,24 +165,24 @@ class _LoginState extends State<Login> {
                       obscureText: true,
                       decoration: InputDecoration(
                         labelText: 'Contraseña',
-                        labelStyle: TextStyle(
+                        labelStyle: const TextStyle(
                           color: Colors.grey, // color del label
                           fontWeight: FontWeight.bold,
                         ),
                         border: OutlineInputBorder(
                           borderRadius: BorderRadius.circular(18),
-                          borderSide: BorderSide(color: Color(0xFFFCCED1)),
+                          borderSide: const BorderSide(color: Color(0xFFFCCED1)),
                         ),
                         focusedBorder: OutlineInputBorder(
                           borderRadius: BorderRadius.circular(18),
-                          borderSide: BorderSide(color: Color(0xFFE24E59)),
+                          borderSide: const BorderSide(color: Color(0xFFE24E59)),
                         ),
                         enabledBorder: OutlineInputBorder(
                           borderRadius: BorderRadius.circular(18),
-                          borderSide: BorderSide(color: Color(0xFFFCCED1)),
+                          borderSide: const BorderSide(color: Color(0xFFFCCED1)),
                         ),
                         contentPadding:
-                            EdgeInsets.symmetric(vertical: 25, horizontal: 20),
+                            const EdgeInsets.symmetric(vertical: 25, horizontal: 20),
                       ),
                       onChanged: (value) => usuariosProvier.password = value,
                       validator: (value) {
@@ -193,23 +196,45 @@ class _LoginState extends State<Login> {
                       },
                     ),
                   ),
-                  SizedBox(height: 40),
+                  const SizedBox(height: 40),
                   SizedBox(
                     width: double.infinity,
                     child: ElevatedButton(
                       style: ElevatedButton.styleFrom(
-                        primary: Color(0xFFE24E59), //color de fondo
-                        padding: EdgeInsets.symmetric(vertical: 26),
+                        primary: const Color(0xFFE24E59), //color de fondo
+                        padding: const EdgeInsets.symmetric(vertical: 26),
                         shape: RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(16),
                         ), //aumento del padding
                       ),
                       onPressed: () {
-                        print('Botón Continuar presionado funca');
-                        //TODO usuario.validar();
-                        Get.to(Perfil(usuariosSerivices: usuariosServices,));
+                        String patternContrasena =
+                            r'^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[!@#\$&*~]).{8,}$';
+                        String pattern =
+                            r'^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$';
+                        RegExp regExp = new RegExp(patternContrasena);
+                        RegExp regExpCorreo = new RegExp(pattern);
+                        if (regExp.hasMatch(usuariosProvier.password ?? '') &&
+                            regExpCorreo
+                                .hasMatch(usuariosProvier.email ?? '')) {
+                          //TODO usuario.validar();
+                          Get.to(Perfil(
+                            usuariosSerivices: usuariosServices,
+                          ));
+                        } else {
+                          ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
+                              content: Row(
+                              children: [
+                                Icon(Icons.lock, color: Colors.white,),
+                                SizedBox(width: 2,),
+                                Text('Correo o contraseña incorrecta', style: TextStyle(color: Colors.red)),
+                              ],
+                          ),
+                          duration: Duration(seconds: 3),
+                          ));
+                        }
                       },
-                      child: Text(
+                      child: const Text(
                         'Continuar',
                         style: TextStyle(
                           fontFamily: 'Proxima Nova',
@@ -219,13 +244,13 @@ class _LoginState extends State<Login> {
                       ),
                     ),
                   ),
-                  SizedBox(height: 30),
+                  const SizedBox(height: 30),
                   Center(
                     child: GestureDetector(
                       onTap: () {
-                        Get.to(Registro()); //navegar a la nueva página
+                        Get.to(const Registro()); //navegar a la nueva página
                       },
-                      child: Text(
+                      child: const Text(
                         '¿No tienes cuenta? Registrate',
                         style: TextStyle(
                           fontSize: 16,
@@ -234,13 +259,13 @@ class _LoginState extends State<Login> {
                       ),
                     ),
                   ),
-                  SizedBox(height: 10),
+                  const SizedBox(height: 10),
                   Center(
                     child: GestureDetector(
                       onTap: () {
-                        Get.to(Registro()); //navegar a la nueva página
+                        Get.to(const Registro()); //navegar a la nueva página
                       },
-                      child: Text(
+                      child: const Text(
                         'He olvidado mi contraseña',
                         style: TextStyle(
                           fontSize: 14,

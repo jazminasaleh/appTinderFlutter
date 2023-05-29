@@ -14,24 +14,24 @@ class Cafes extends StatelessWidget {
     return Scaffold(
       backgroundColor: Colors.white,
       body: Padding(
-        padding: EdgeInsets.all(20),
+        padding: const EdgeInsets.all(20),
         child: SingleChildScrollView(
           // Envuelve la columna principal con un SingleChildScrollView
           child: Container(
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                Align(
+                const Align(
                   alignment: Alignment.center,
                   child: Image(
                     image: AssetImage('assets/images/calendario.png'),
                     width: 140,
                   ),
                 ),
-                SizedBox(height: 20),
+                const SizedBox(height: 20),
                 RichText(
                   textAlign: TextAlign.center,
-                  text: TextSpan(
+                  text: const TextSpan(
                     style: TextStyle(
                       fontSize: 20,
                     ),
@@ -46,7 +46,7 @@ class Cafes extends StatelessWidget {
                     ],
                   ),
                 ),
-                SizedBox(height: 20),
+                const SizedBox(height: 20),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                   children: [
@@ -57,7 +57,7 @@ class Cafes extends StatelessWidget {
                       child: Column(
                         children: [
                           Image(
-                            image: AssetImage('assets/images/cafe1.png'),
+                            image: const AssetImage('assets/images/cafe1.png'),
                             width: MediaQuery.of(context).size.width * 0.4,
                           ),
                         ],
@@ -70,7 +70,7 @@ class Cafes extends StatelessWidget {
                       child: Column(
                         children: [
                           Image(
-                            image: AssetImage('assets/images/cafe2.png'),
+                            image: const AssetImage('assets/images/cafe2.png'),
                             width: MediaQuery.of(context).size.width * 0.4,
                           ),
                         ],
@@ -78,7 +78,7 @@ class Cafes extends StatelessWidget {
                     ),
                   ],
                 ),
-                SizedBox(height: 10),
+                const SizedBox(height: 10),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                   children: [
@@ -89,7 +89,7 @@ class Cafes extends StatelessWidget {
                       child: Column(
                         children: [
                           Image(
-                            image: AssetImage('assets/images/cafe3.png'),
+                            image: const AssetImage('assets/images/cafe3.png'),
                             width: MediaQuery.of(context).size.width * 0.4,
                           ),
                         ],
@@ -102,7 +102,7 @@ class Cafes extends StatelessWidget {
                       child: Column(
                         children: [
                           Image(
-                            image: AssetImage('assets/images/cafe4.png'),
+                            image: const AssetImage('assets/images/cafe4.png'),
                             width: MediaQuery.of(context).size.width * 0.4,
                           ),
                         ],
@@ -121,7 +121,7 @@ class Cafes extends StatelessWidget {
         items: [
           BottomNavigationBarItem(
             icon: IconButton(
-              icon: Icon(
+              icon: const Icon(
                 Icons.home_outlined,
                 color: Colors.grey,
               ),
@@ -135,7 +135,7 @@ class Cafes extends StatelessWidget {
           ),
           BottomNavigationBarItem(
               icon: IconButton(
-                icon: Icon(Icons.person_outline),
+                icon: const Icon(Icons.person_outline),
                 color: Colors.grey,
                 onPressed: () {
                   Get.to(Actualizardatos());

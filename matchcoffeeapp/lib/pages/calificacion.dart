@@ -88,7 +88,7 @@ class _RatingScreenState extends State<RatingScreen> {
                     setState(() {});
                   },
                 ),
-                SizedBox(height: 20),
+                const SizedBox(height: 20),
                 const SizedBox(height: 10),
                 const Text(
                   'Selecciona tu nivel de satisfacción',
@@ -194,15 +194,12 @@ class _RatingScreenState extends State<RatingScreen> {
                 const SizedBox(height: 35),
                 ElevatedButton(
                   onPressed: () {
-                    print('este es mi correo ${usuariosProvier.email}');
                     /*
                       AQUI TOMAN LOS DATOS DE LA PANTALLA CON EN ON PRESSED DEL BOTON
                     */
                     for (var i = 0; i < usuariosServices.usuarios.length; i++) {
                       if (usuariosServices.usuarios[i]['email'] ==
                           usuariosProvier.email) {
-                        print(
-                            'este es mi id ${usuariosServices.usuarios[i]['uid']}');
                         usuariosServices.updateUser(
                             '${usuariosServices.usuarios[i]['uid']}',
                             '${usuariosServices.usuarios[i]['date']}',
@@ -219,7 +216,7 @@ class _RatingScreenState extends State<RatingScreen> {
                       context: context,
                       builder: (context) {
                         return AlertDialog(
-                          title: Text('Datos'),
+                          title: const Text('Datos'),
                           content: Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
                             mainAxisSize: MainAxisSize.min,
@@ -266,7 +263,7 @@ class _RatingScreenState extends State<RatingScreen> {
         items: [
           BottomNavigationBarItem(
             icon: IconButton(
-              icon: Icon(
+              icon: const Icon(
                 Icons.home_outlined,
                 color: Colors.grey,
               ),
@@ -280,7 +277,7 @@ class _RatingScreenState extends State<RatingScreen> {
           ),
           BottomNavigationBarItem(
               icon: IconButton(
-                icon: Icon(Icons.person_outline),
+                icon: const Icon(Icons.person_outline),
                 color: Colors.grey,
                 onPressed: () {
                   Get.to(Actualizardatos());

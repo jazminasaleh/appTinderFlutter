@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-//import 'package:flutter_datetime_picker/flutter_datetime_picker.dart';
+
 
 class Agenda extends StatefulWidget {
   @override
@@ -29,10 +29,10 @@ class _AgendaState extends State<Agenda> {
               fit: BoxFit.cover,
             ),
           ),
-          SizedBox(height: 10),
+          const SizedBox(height: 10),
           RichText(
             textAlign: TextAlign.center,
-            text: TextSpan(
+            text: const TextSpan(
               style: TextStyle(
                 fontSize: 16,
               ),
@@ -54,7 +54,7 @@ class _AgendaState extends State<Agenda> {
               ],
             ),
           ),
-          SizedBox(height: 10),
+          const SizedBox(height: 10),
           GestureDetector(
             onTap: () {
                fechaHoy = '${dateTime.day}/${dateTime.month}/${dateTime.year}';
@@ -75,15 +75,15 @@ class _AgendaState extends State<Agenda> {
                 border: Border.all(color: Color(0xFFFCCED1)),
                 borderRadius: BorderRadius.circular(18),
               ),
-              padding: EdgeInsets.symmetric(vertical: 25, horizontal: 20),
+              padding: const EdgeInsets.symmetric(vertical: 25, horizontal: 20),
               child: Row(
                 children: [
-                  Icon(Icons.calendar_today),
-                  SizedBox(width: 20),
+                  const Icon(Icons.calendar_today),
+                  const SizedBox(width: 20),
                   Text( fecha == fechaHoy
                   ? 'Fecha de invitación'
                   : fecha,
-                    style: TextStyle(
+                    style: const TextStyle(
                       color: Colors.grey,
                       fontWeight: FontWeight.bold,
                     ),
