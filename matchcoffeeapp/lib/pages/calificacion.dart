@@ -6,7 +6,7 @@ import 'package:matchcoffeeapp/services/firestore_services.dart';
 import 'package:provider/provider.dart';
 
 import '../provider/usuarios_provider.dart';
-
+//* Poder relaizarle una calificacion a la app
 class RatingScreen extends StatefulWidget {
   const RatingScreen({super.key});
 

@@ -4,7 +4,7 @@ import 'package:matchcoffeeapp/pages/actualizardatos.dart';
 import 'package:matchcoffeeapp/services/firestore_services.dart';
 import 'citas.dart';
 import 'package:swipable_stack/swipable_stack.dart';
-
+//*poder ver todas  las personas con las que puedo tener una cita
 class Perfil extends StatelessWidget {
   UsuariosSerivices usuariosSerivices;
   Perfil({required this.usuariosSerivices});
@@ -105,89 +105,100 @@ class _CardState extends State<_Card> {
     return Scaffold(
       body: Stack(children: [
         SwipableStack(
+          onSwipeCompleted: (index, direction) {
+            if (index >= usuariosSerivices.usuarios.length - 1) {
+              setState(() {
+                usuariosSerivices.usuarios.addAll(usuariosSerivices.usuarios);
+              });
+            }
+          },
           allowVerticalSwipe: false,
           itemCount: usuariosSerivices.usuarios.length,
           controller: controller,
           builder: (BuildContext context, propierties) {
-            ///*controller.rewind();
-            return Container(
-              alignment: Alignment.bottomLeft,
-              padding: const EdgeInsets.all(10),
-              width: MediaQuery.of(context).size.width * 0.90,
-              height: MediaQuery.of(context).size.height * 0.70,
-              decoration: BoxDecoration(
-                color: Colors.black,
-                image: DecorationImage(
-                    image: NetworkImage(
-                        '${usuariosSerivices.usuarios[propierties.index]['foto']}'),
-                    fit: BoxFit.cover,
-                    opacity: 0.7),
-                borderRadius: BorderRadius.circular(15),
-                boxShadow: [
-                  BoxShadow(
-                    color: Colors.red.withOpacity(0.2),
-                    spreadRadius: 6,
-                    blurRadius: 8,
-                  ),
-                ],
-              ),
-              child: Column(
-                mainAxisSize: MainAxisSize.min,
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Text(
-                    '${usuariosSerivices.usuarios[propierties.index]['nombre']}',
-                    style: const TextStyle(
-                        color: Colors.white,
-                        fontSize: 25,
-                        fontWeight: FontWeight.bold),
-                  ),
-                  Container(
-                    padding: const EdgeInsets.symmetric(
-                      vertical: 5,
-                      horizontal: 14,
+            return GestureDetector(
+              onTap: () {
+                
+              },
+              child: Container(
+                alignment: Alignment.bottomLeft,
+                padding: const EdgeInsets.all(10),
+                width: MediaQuery.of(context).size.width * 0.90,
+                height: MediaQuery.of(context).size.height * 0.70,
+                decoration: BoxDecoration(
+                  color: Colors.black,
+                  image: DecorationImage(
+                      image: NetworkImage(
+                          '${usuariosSerivices.usuarios[propierties.index]['foto']}'),
+                      fit: BoxFit.cover,
+                      opacity: 0.7),
+                  borderRadius: BorderRadius.circular(15),
+                  boxShadow: [
+                    BoxShadow(
+                      color: Colors.red.withOpacity(0.2),
+                      spreadRadius: 6,
+                      blurRadius: 8,
                     ),
-                    margin: const EdgeInsets.only(top: 20),
-                    decoration: BoxDecoration(
-                      color: Colors.white,
-                      borderRadius: BorderRadius.circular(20),
-                    ),
-                    child: Text(
-                      '${usuariosSerivices.usuarios[propierties.index]['signo']}',
+                  ],
+                ),
+                child: Column(
+                  mainAxisSize: MainAxisSize.min,
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(
+                      '${usuariosSerivices.usuarios[propierties.index]['nombre']}',
                       style: const TextStyle(
-                        fontSize: 18,
-                        fontWeight: FontWeight.bold,
+                          color: Colors.white,
+                          fontSize: 25,
+                          fontWeight: FontWeight.bold),
+                    ),
+                    Container(
+                      padding: const EdgeInsets.symmetric(
+                        vertical: 5,
+                        horizontal: 14,
+                      ),
+                      margin: const EdgeInsets.only(top: 20),
+                      decoration: BoxDecoration(
+                        color: Colors.white,
+                        borderRadius: BorderRadius.circular(20),
+                      ),
+                      child: Text(
+                        '${usuariosSerivices.usuarios[propierties.index]['signo']}',
+                        style: const TextStyle(
+                          fontSize: 18,
+                          fontWeight: FontWeight.bold,
+                        ),
                       ),
                     ),
-                  ),
-                  const SizedBox(
-                    height: 80,
-                  ),
-                  GestureDetector(
-                    onTap: () {
-                      Get.to(Citas(
-                        nombre:
-                            '${usuariosSerivices.usuarios[propierties.index]['nombre']}',
-                      ));
-                    },
-                    child: Row(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          Container(
-                            width: 70,
-                            height: 70,
-                            decoration: const BoxDecoration(
-                              color: Color(0xff5588a2),
-                              shape: BoxShape.circle,
+                    const SizedBox(
+                      height: 80,
+                    ),
+                    GestureDetector(
+                      onTap: () {
+                        Get.to(Citas(
+                          nombre:
+                              '${usuariosSerivices.usuarios[propierties.index]['nombre']}',
+                        ));
+                      },
+                      child: Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            Container(
+                              width: 70,
+                              height: 70,
+                              decoration: const BoxDecoration(
+                                color: Color(0xff5588a2),
+                                shape: BoxShape.circle,
+                              ),
+                              child: const Icon(
+                                Icons.calendar_month,
+                                color: Colors.white,
+                              ),
                             ),
-                            child: const Icon(
-                              Icons.calendar_month,
-                              color: Colors.white,
-                            ),
-                          ),
-                        ]),
-                  ),
-                ],
+                          ]),
+                    ),
+                  ],
+                ),
               ),
             );
           },

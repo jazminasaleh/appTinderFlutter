@@ -10,7 +10,7 @@ import '../provider/usuarios_provider.dart';
 import '../services/auth_service.dart';
 import 'login.dart';
 
-//*Esta clase es la sehunda parte del registro
+//*Esta clase es la segunda parte del registro
 class Segundopasor extends StatefulWidget {
   @override
   State<Segundopasor> createState() => _SegundopasorState();
@@ -363,6 +363,7 @@ class _SegundopasorState extends State<Segundopasor> {
                           ), //aumento del padding
                         ),
                         onPressed: () async {
+                           DateTime dateHoy = DateTime.now();
                           final authService =
                               Provider.of<AuthService>(context, listen: false);
                           final String? errorMessage =
@@ -379,11 +380,11 @@ class _SegundopasorState extends State<Segundopasor> {
                           if (newPictureFile != null &&
                               usuariosProvier.name.length >= 3 &&
                               fecha != fechaHoy) {
+                              
                             if (errorMessage == null) {
                               String nameCapital =
                                   capitalizeFirstLetter(usuariosProvier.name);
                               usuariosProvier.name = nameCapital;
-                              print(usuariosProvier.name);
                               final String? imageUrl = await usuariosServices
                                   .uploadImage(newPictureFile!);
                               usuariosProvier.foto = imageUrl!;

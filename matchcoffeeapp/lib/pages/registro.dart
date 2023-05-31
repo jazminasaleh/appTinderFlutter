@@ -6,14 +6,12 @@ import 'package:matchcoffeeapp/services/firestore_services.dart';
 import 'package:provider/provider.dart';
 
 import '../provider/usuarios_provider.dart';
-
+//*pantalla para registrarse en la app
 class Registro extends StatelessWidget {
   const Registro();
   @override
   Widget build(BuildContext context) {
     final usuariosProvier = Provider.of<UsariosProvider>(context);
-    usuariosProvier.email = ' ';
-    usuariosProvier.password = ' ';
     final usuariosServices = Provider.of<UsuariosSerivices>(context);
      final GlobalKey<ScaffoldState> scaffoldKey = GlobalKey<ScaffoldState>();
     return Scaffold(

@@ -5,21 +5,23 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/foundation.dart';
 import 'package:http/http.dart' as http;
 
+//*conexion con la base de datos
 class UsuariosSerivices extends ChangeNotifier {
   List usuarios = [];
   FirebaseFirestore db = FirebaseFirestore.instance;
   bool isSaving = false;
   File? newPictureFile;
-
+  
+  //*constructor
   UsuariosSerivices() {
     this.getUsers();
   }
 
+//*obtener usuaario s de la base de datos
   Future<List> getUsers() async {
     notifyListeners();
     CollectionReference collectionReferenceUsers = db.collection('usuarios');
     QuerySnapshot queryUsers = await collectionReferenceUsers.get();
-    print('query $queryUsers');
     queryUsers.docs.forEach((documento) {
       final Map<String, dynamic> data = documento.data() as Map<String, dynamic>;
       final user = {
@@ -39,6 +41,7 @@ class UsuariosSerivices extends ChangeNotifier {
     return usuarios;
   }
 
+//*Agregar infromacion a la base de datos
   Future addUser(String date, String email, String foto, String genero, String nombre, String signo) async {
     await db.collection('usuarios').add({"calificacion": 0, "date": date, "email": email, "foto": foto, "genero": genero, "nombre": nombre, "opinion": '', "signo": signo});
     usuarios.add({"calificacion": 0, "date": date, "email": email, "foto": foto, "genero": genero, "nombre": nombre, "opinion": '', "signo": signo});
@@ -49,6 +52,7 @@ class UsuariosSerivices extends ChangeNotifier {
     await db.collection('usuarios').doc(uid).set({"calificacion": calificacion, "date": date, "email": email, "foto": foto, "genero": genero, "nombre": nombre, "opinion": opinion, "signo": signo});
   }
 
+//*Agregar imagen en cloudiary
   Future<String?> uploadImage(File newPictureFile) async {
     if (newPictureFile == null) return null;
     this.isSaving = true;

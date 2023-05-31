@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:matchcoffeeapp/pages/login.dart';
 import 'package:matchcoffeeapp/services/firestore_services.dart';
-
+//*La pantalla de la bienvenida
 class Intro extends StatelessWidget {
   UsuariosSerivices usuariosServices = new UsuariosSerivices();
   final GlobalKey<ScaffoldState> scaffoldKey = GlobalKey<ScaffoldState>();

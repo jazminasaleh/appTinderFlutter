@@ -16,7 +16,7 @@ void main() async {
   );
   runApp(Estados());
 }
-
+//*Los estados de la aplicacion
 class Estados extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
@@ -31,6 +31,7 @@ class Estados extends StatelessWidget {
   }
 }
 
+//*las rutas de la aplicacion
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
 

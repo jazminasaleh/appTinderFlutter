@@ -32,7 +32,6 @@ class _ActualizardatosState extends State<Actualizardatos> {
       if (pickedFile != null) {
         imagen = File(pickedFile.path);
         newPictureFile = File.fromUri(Uri(path: pickedFile.path));
-        print(' tenemos imagen $imagen');
       } else {
         print('No se selecciono ninguna imagen');
       }

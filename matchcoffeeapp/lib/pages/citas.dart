@@ -6,7 +6,7 @@ import '../controladores/usuario.dart';
 import 'actualizardatos.dart';
 import 'cafes.dart';
 import 'calificacion.dart';
-
+//*poder agendar una cita
 class Citas extends StatefulWidget {
   String nombre;
   Citas({required this.nombre});

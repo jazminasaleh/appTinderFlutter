@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
-
+//*datos de la base de datos
 class UsariosProvider extends ChangeNotifier {
-  
   String email = '';
   String password = '';
   String name = '';
