@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+
 //*datos de la base de datos
 class UsariosProvider extends ChangeNotifier {
   String email = '';
@@ -7,6 +8,7 @@ class UsariosProvider extends ChangeNotifier {
   String date = '';
   String zodiacSign = '';
   String gender = '';
+  String id = '';
   String? foto;
 
   bool _isLoading = false;

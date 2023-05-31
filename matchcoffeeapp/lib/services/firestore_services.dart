@@ -11,7 +11,7 @@ class UsuariosSerivices extends ChangeNotifier {
   FirebaseFirestore db = FirebaseFirestore.instance;
   bool isSaving = false;
   File? newPictureFile;
-  
+
   //*constructor
   UsuariosSerivices() {
     this.getUsers();
@@ -23,7 +23,8 @@ class UsuariosSerivices extends ChangeNotifier {
     CollectionReference collectionReferenceUsers = db.collection('usuarios');
     QuerySnapshot queryUsers = await collectionReferenceUsers.get();
     queryUsers.docs.forEach((documento) {
-      final Map<String, dynamic> data = documento.data() as Map<String, dynamic>;
+      final Map<String, dynamic> data =
+          documento.data() as Map<String, dynamic>;
       final user = {
         "calificacion": data['calificacion'],
         "date": data['date'],
@@ -42,14 +43,59 @@ class UsuariosSerivices extends ChangeNotifier {
   }
 
 //*Agregar infromacion a la base de datos
-  Future addUser(String date, String email, String foto, String genero, String nombre, String signo) async {
-    await db.collection('usuarios').add({"calificacion": 0, "date": date, "email": email, "foto": foto, "genero": genero, "nombre": nombre, "opinion": '', "signo": signo});
-    usuarios.add({"calificacion": 0, "date": date, "email": email, "foto": foto, "genero": genero, "nombre": nombre, "opinion": '', "signo": signo});
+  Future addUser(String date, String email, String foto, String genero,
+      String nombre, String signo) async {
+    await db.collection('usuarios').add({
+      "calificacion": 0,
+      "date": date,
+      "email": email,
+      "foto": foto,
+      "genero": genero,
+      "nombre": nombre,
+      "opinion": '',
+      "signo": signo
+    });
+    usuarios.add({
+      "calificacion": 0,
+      "date": date,
+      "email": email,
+      "foto": foto,
+      "genero": genero,
+      "nombre": nombre,
+      "opinion": '',
+      "signo": signo
+    });
     notifyListeners();
   }
 
-  Future updateUser(String uid, String date, String email, String foto, String genero, String nombre, String signo, int calificacion, String opinion) async{
-    await db.collection('usuarios').doc(uid).set({"calificacion": calificacion, "date": date, "email": email, "foto": foto, "genero": genero, "nombre": nombre, "opinion": opinion, "signo": signo});
+  Future updateUser(
+      String uid,
+      String date,
+      String email,
+      String foto,
+      String genero,
+      String nombre,
+      String signo,
+      int calificacion,
+      String opinion) async {
+    await db.collection('usuarios').doc(uid).set({
+      "uid": uid,
+      "calificacion": calificacion,
+      "date": date,
+      "email": email,
+      "foto": foto,
+      "genero": genero,
+      "nombre": nombre,
+      "opinion": opinion,
+      "signo": signo
+    });
+    for (var i = 0; i < usuarios.length; i++) {
+      if (usuarios[i]['uid'] == uid) {
+        usuarios[i]['calificacion'] = calificacion;
+        usuarios[i]['foto'] = foto;
+        usuarios[i]['opinion'] = opinion;
+      }
+    }
   }
 
 //*Agregar imagen en cloudiary
